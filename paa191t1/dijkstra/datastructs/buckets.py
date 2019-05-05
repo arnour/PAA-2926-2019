@@ -7,7 +7,7 @@ class Buckets(datastructs.DijkstraDistance):
     def __call__(self, nodes):
         self._buckets = {}
         self._non_visited = nodes.copy()
-        
+
         self._d_vector = [None] * (max(nodes) + 1)
         self._buckets[math.inf] = nodes.copy()
         for node in nodes:
