@@ -19,7 +19,7 @@ class Vector(datastructs.DijkstraDistance):
         Então remove o nó da lista e retorna juntamento com sua distância.
 
         Returns:
-            int, int: nó de menor distância e seu respectiva distância.
+            int, int: nó de menor distância e sua respectiva distância.
         """
         smallest = math.inf
         found = None

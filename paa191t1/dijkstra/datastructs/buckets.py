@@ -22,7 +22,7 @@ class Buckets(datastructs.DijkstraDistance):
         Então remove o nó da do bucket e retorna juntamente com sua distância.
 
         Returns:
-            int, int: nó de menor distância e seu respectiva distância.
+            int, int: nó de menor distância e sua respectiva distância.
         """
         smallest = math.inf
         for b_keys in self._buckets.keys():
@@ -33,6 +33,15 @@ class Buckets(datastructs.DijkstraDistance):
         return node, smallest
 
     def update(self, node, distance):
+        """Atualiza a distância de um nó no seu bucket correto.
+
+        Atualiza o vetor de mapeamento de nó para o bucket e coloca o
+        nó dentro do bucket correto.
+
+        Args:
+            node (int): O nó a ser atualizado
+            distance (int): A nova distância
+        """
         last_bucket = self._d_vector[node]
         self._d_vector[node] = distance
         self._buckets[last_bucket].remove(node)
@@ -42,9 +51,15 @@ class Buckets(datastructs.DijkstraDistance):
             self._buckets[distance] = [node]
 
     def has_nodes_to_visit(self):
+        """bool: Retorna verdadeiro se existe algum nó que ainda não foi visitado. Do contrário, falso."""
         return len(self._non_visited) > 0
 
     def value(self, node):
+        """Retorna a distância de um dado nó.
+
+        Args:
+            node (int): O nó
+        """
         return self._d_vector[node]
 
     @property
