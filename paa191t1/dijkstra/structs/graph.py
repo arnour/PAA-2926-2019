@@ -9,10 +9,10 @@ class Graph(object):
         >>> dg.add_weighted_edges_from([(0, 1, 1), (1, 2, 1), (2, 3, 1)])
 
         >>> graph = graph.Graph(dg)
-        
+
         >>> graph.all_nodes()
         [0, 1, 2, 3]
-        
+
         >>> graph.successors(0)
         [1]
 
@@ -39,7 +39,7 @@ class Graph(object):
 
     def edge_weight(self, origin_node, target_node):
         """Retorna o peso da aresta (origin_node, target_node)
-      
+
         Args:
             origin_node (int): O nó origem da aresta
             target_node (int): O nó destino da aresta
