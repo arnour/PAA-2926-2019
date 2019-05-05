@@ -1,4 +1,5 @@
 import math
+from pyllist import dllist
 from paa191t1.dijkstra import datastructs
 
 
@@ -9,7 +10,7 @@ class Buckets(datastructs.DijkstraDistance):
         self._non_visited = nodes.copy()
 
         self._d_vector = [None] * (max(nodes) + 1)
-        self._buckets[math.inf] = nodes.copy()
+        self._buckets[math.inf] = dllist(nodes.copy())
         for node in nodes:
             self._d_vector[node] = math.inf
         return self
@@ -26,7 +27,7 @@ class Buckets(datastructs.DijkstraDistance):
         """
         smallest = math.inf
         for b_keys in self._buckets.keys():
-            if (b_keys <= smallest) and (len(self._buckets[b_keys]) > 0):
+            if (b_keys <= smallest) and (self._buckets[b_keys].size > 0):
                 smallest = b_keys
         node = self._buckets[smallest].pop()
         self._non_visited.remove(node)
@@ -48,7 +49,7 @@ class Buckets(datastructs.DijkstraDistance):
         if self._buckets.get(distance):
             self._buckets[distance].append(node)
         else:
-            self._buckets[distance] = [node]
+            self._buckets[distance] = dllist([node])
 
     def has_nodes_to_visit(self):
         """bool: Retorna verdadeiro se existe algum nó que ainda não foi visitado. Do contrário, falso."""
