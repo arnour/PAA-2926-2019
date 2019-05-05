@@ -22,7 +22,7 @@ def dijkstra(graph, source_node, distance_struct=datastructs.DijkstraDistance())
     predecessors = {}
 
     # Cria a estrutura de dados responsável por armazenar as distâncias
-    struct = distance_struct(graph.all_nodes())
+    struct = distance_struct(list(graph.all_nodes()))
 
     # Inicializa o nó inicial com o menor valor
     # Considere o nó inicial como s

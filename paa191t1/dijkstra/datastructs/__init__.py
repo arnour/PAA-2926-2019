@@ -1,5 +1,8 @@
 class DijkstraDistance(object):
 
+    def __call__(self, nodes):
+        raise NotImplementedError('__call__ is not implemented in this class. Use one of its sub classes.')
+
     def pop(self):
         raise NotImplementedError('pop is not implemented in this class. Use one of its sub classes.')
 

@@ -6,13 +6,13 @@ from hamcrest import (
 )
 import math
 import networkx as nx
-from paa191t1.dijkstra.datastructs import graph, vector
+from paa191t1.dijkstra.datastructs import graph, vector, buckets
 from paa191t1.dijkstra import dijkstra
 
 
 def test_should_return_shortest_distances_and_predecessors_for_equally_weighted_graph_with_one_path():
 
-    all_structs = [vector.Vector()]
+    all_structs = [vector.Vector(), buckets.Buckets()]
 
     for strct in all_structs:
 
@@ -36,7 +36,7 @@ def test_should_return_shortest_distances_and_predecessors_for_equally_weighted_
 
 def test_should_return_shortest_distances_and_predecessors_for_equally_weighted_graph_with_many_paths():
 
-    all_structs = [vector.Vector()]
+    all_structs = [vector.Vector(), buckets.Buckets()]
 
     for strct in all_structs:
 
@@ -60,7 +60,7 @@ def test_should_return_shortest_distances_and_predecessors_for_equally_weighted_
 
 def test_should_return_shortest_distances_and_predecessors_for_differently_weighted_graph_with_many_paths():
 
-    all_structs = [vector.Vector()]
+    all_structs = [vector.Vector(), buckets.Buckets()]
 
     for strct in all_structs:
 
@@ -85,7 +85,7 @@ def test_should_return_shortest_distances_and_predecessors_for_differently_weigh
 
 def test_should_return_shortest_distances_and_predecessors_for_graph_with_connected_components():
 
-    all_structs = [vector.Vector()]
+    all_structs = [vector.Vector(), buckets.Buckets()]
 
     for strct in all_structs:
 
@@ -110,7 +110,7 @@ def test_should_return_shortest_distances_and_predecessors_for_graph_with_connec
 
 def test_should_return_shortest_distances_and_predecessors_for_graph_with_unreachble_nodes():
 
-    all_structs = [vector.Vector()]
+    all_structs = [vector.Vector(), buckets.Buckets()]
 
     for strct in all_structs:
 
