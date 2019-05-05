@@ -1,8 +1,8 @@
 import math
-from paa191t1.dijkstra import structs
+from paa191t1.dijkstra import datastructs
 
 
-class Vector(structs.DijkstraDistance):
+class Vector(datastructs.DijkstraDistance):
 
     def __call__(self, nodes):
         self.__nodes = []

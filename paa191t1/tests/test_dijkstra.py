@@ -6,7 +6,7 @@ from hamcrest import (
 )
 import math
 import networkx as nx
-from paa191t1.dijkstra.structs import graph, vector
+from paa191t1.dijkstra.datastructs import graph, vector
 from paa191t1.dijkstra import dijkstra
 
 

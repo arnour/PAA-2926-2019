@@ -4,7 +4,7 @@ from hamcrest import (
     equal_to
 )
 import math
-from paa191t1.dijkstra.structs.vector import Vector
+from paa191t1.dijkstra.datastructs.vector import Vector
 
 
 def create_vector(number_of_nodes=4):

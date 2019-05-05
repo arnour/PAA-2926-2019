@@ -1,7 +1,7 @@
-from paa191t1.dijkstra import structs
+from paa191t1.dijkstra import datastructs
 
 
-def dijkstra(graph, source_node, distance_struct=structs.DijkstraDistance()):
+def dijkstra(graph, source_node, distance_struct=datastructs.DijkstraDistance()):
     """O algoritmo considera um conjunto de menores caminhos a partir de um nó inicial.
 
     A cada iteração busca-se nas adjacências de cada um dos nós, aquele com menor distância

@@ -31,7 +31,7 @@ make tests
 
 - paa191t1
     - dijkstra
-        - structs
+        - datastructs
             - vector            
             - heap
             - fibonacci heap
