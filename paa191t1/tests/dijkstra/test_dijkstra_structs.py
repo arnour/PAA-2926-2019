@@ -1,5 +1,5 @@
 import math
-from unittest import skip, TestCase, ignore
+from unittest import skip, TestCase
 from hamcrest import (
     assert_that,
     has_length,
