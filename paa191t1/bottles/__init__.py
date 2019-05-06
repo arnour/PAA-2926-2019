@@ -11,6 +11,15 @@ def max_trials(max_height, test_bottles):
     return round(test_bottles * (max_height**(1.0 / test_bottles)))
 
 
+def check_point_height(start, end, test_bottles):
+    """Returns the size of each partition to be checked
+
+    Returns:
+        (int) check point size
+    """
+    return round(((end - start)**(test_bottles - 1))**(1 / test_bottles))
+
+
 def bottles(max_height, test_bottles, break_point):
     """O algoritmo recebe a altura máxima, a número de frascos que podem ser utilizados nos testes e a altura que um frasco quebra.
 
@@ -27,7 +36,24 @@ def bottles(max_height, test_bottles, break_point):
         break_point (long): A altura onde o frasco quebra de fato. Portanto, a altura a ser encontrada.
 
     Returns:
-        int, int: Quantas tentativas foram feitas e quantos frascos foram utilizados
+        bool, int, int: encontrado, tentativas usadas, frascos usados
     """
 
-    return 0, 0
+    step = check_point_height(start=0, end=max_height, test_bottles=test_bottles)
+    trials = max_trials(max_height, test_bottles)
+    found = False
+    lower = used_trials = used_bottles = 0
+
+    while not found and used_bottles < test_bottles and used_trials < trials:
+        used_trials += 1
+        upper = min(step + lower, max_height)
+        if (step > 1) and (break_point <= upper):
+            used_bottles += 1
+            step = check_point_height(start=lower, end=upper, test_bottles=test_bottles - used_bottles)
+        elif (step == 1) and (break_point == upper):
+            used_bottles += 1
+            found = True
+        else:
+            lower = upper
+
+    return found, used_trials, used_bottles
