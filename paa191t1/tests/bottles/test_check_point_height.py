@@ -3,7 +3,7 @@ from hamcrest import (
     assert_that,
     equal_to
 )
-from paa191t1.bottles import check_point_height
+from paa191t1.bottles.bottles import check_point_height
 
 
 class TestCheckPointSize(unittest.TestCase):

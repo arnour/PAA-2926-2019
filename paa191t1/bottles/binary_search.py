@@ -1,4 +1,5 @@
-from bitarray import bitarray
+from paa191t1.bottles.bit_array import BitArray
+
 
 def bottles(max_height, test_bottles, break_point):
     """O algoritmo recebe o número de bits, o número de frascos que podem ser utilizados nos testes e a altura que um frasco quebra em bits.
@@ -13,7 +14,7 @@ def bottles(max_height, test_bottles, break_point):
     Args:
         max_height (long): O número de bits que representa a altura máxima
         test_bottles (int): O número de frascos que podem ser utilizados para testar
-        break_point (long): A altura onde o frasco quebra de fato em bits. Portanto, a altura a ser encontrada.
+        break_point (str): A altura onde o frasco quebra de fato em bits. Portanto, a altura a ser encontrada.
 
     Returns:
         bool, int, int: encontrado, tentativas usadas, frascos usados
@@ -21,19 +22,44 @@ def bottles(max_height, test_bottles, break_point):
 
     found = False
     used_trials = used_bottles = 0
-    max_bits = bitarray(max_height * "1")
-    break_point_bits = bitarray(break_point)
-    middle_bits = max_bits[:-1]
-    last_bit = max_bits[-2:-1]
-    while not found and used_bottles < test_bottles and used_trials < trials:
+    max_bits = BitArray(max_height * "1")
+    roll_zero = max_bits.length() + 1
+    # trials = max_bits.length()
+    break_point_bits = BitArray(break_point)
+    min_bits = ref_bits = BitArray((max_height - 1) * "0" + "1")
+
+    if BitArray(max_height * "0") == break_point_bits:
+        used_bottles += 1
+        return True, used_trials, used_bottles
+
+    while not found:
         used_trials += 1
+        if ref_bits < break_point_bits:
 
-        if middle_bits > break_point_bits:
-            used_bottles -= 1
-            last_bit = middle_bits[-2:-1]
-            middle_bits = middle_bits[:-1]
+            min_bits = ref_bits
+            ref_bits = ref_bits << 1
+            ref_bits[-1] = True
 
-        elif middle_bits < break_point_bits:
-            middle_bits = middle_bits + last_bit.invert()
+        else:
+            max_bits = ref_bits
+            used_bottles += 1
+            zero_index = ref_bits.length() - 1
+            while not found:
+                used_trials += 1
+                if ref_bits == break_point_bits:
+                    used_bottles += 1
+                    found = True
+                elif ref_bits > break_point_bits:
+                    max_bits = ref_bits
+                    used_bottles += 1
+                    ref_bits[zero_index - 1] = True
+                    ref_bits[zero_index] = False
+                    zero_index -= 1
+                else:
+                    print("falta fazer")
+
+
+
+
 
     return found, used_trials, used_bottles
