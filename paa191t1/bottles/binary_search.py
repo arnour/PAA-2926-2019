@@ -38,6 +38,7 @@ def bottles(max_height, break_point):
 
         elif ref_bits > break_point_bits:
             # aqui vamos decrementando dentro de um range menor os bits em potência de 2.
+            used_bottles += 1
             ref_bits[one_to_move] = False
             ref_bits[one_to_move + 1] = True
             one_to_move += 1
