@@ -1,6 +1,7 @@
 from paa191t1.dijkstra import datastructs
 import math
 
+
 class FibHeap(datastructs.DijkstraDistance):
 
     def __call__(self, nodes):
@@ -18,12 +19,10 @@ class FibHeap(datastructs.DijkstraDistance):
 
         return self
 
-
     def pop(self):
         node_pair = (self.__heap.extract_min()).data
-        
-        return node_pair[1], node_pair[0]
 
+        return node_pair[1], node_pair[0]
 
     def update(self, node, distance):
         if distance == 0:
@@ -33,13 +32,12 @@ class FibHeap(datastructs.DijkstraDistance):
 
         else:
             self.__distances[node] = distance
-            
-            self.__heap.insert([self.__distances[node], node])
 
+            self.__heap.insert([self.__distances[node], node])
 
     def has_nodes_to_visit(self):
         """bool: Retorna verdadeiro se existe algum nó que ainda não foi visitado. Do contrário, falso."""
-        return self.__heap.total_nodes  > 0
+        return self.__heap.total_nodes > 0
 
     def value(self, node):
         """Retorna a distância de um dado nó.
@@ -52,17 +50,19 @@ class FibHeap(datastructs.DijkstraDistance):
     def values(self):
         return dict([(k, v) for k, v in enumerate(self.__distances) if v is not None])
 
-# https://github.com/danielborowski/fibonacci-heap-python		
+# https://github.com/danielborowski/fibonacci-heap-python
+
+
 class FibonacciHeap:
-    
-    # internal node class 
+
+    # internal node class
     class Node:
         def __init__(self, data):
             self.data = data
             self.parent = self.child = self.left = self.right = None
             self.degree = 0
             self.mark = False
-            
+
     # function to iterate through a doubly linked list
     def iterate(self, head):
         node = stop = head
@@ -74,17 +74,17 @@ class FibonacciHeap:
                 flag = True
             yield node
             node = node.right
-    
+
     # pointer to the head and minimum node in the root list
     root_list, min_node = None, None
-    
+
     # maintain total node count in full fibonacci heap
     total_nodes = 0
-    
+
     # return min node in O(1) time
     def find_min(self):
         return self.min_node
-         
+
     # extract (delete) the min node from the heap in O(log n) time
     # amortized cost analysis can be found here (http://bit.ly/1ow1Clm)
     def extract_min(self):
@@ -105,7 +105,7 @@ class FibonacciHeap:
                 self.consolidate()
             self.total_nodes -= 1
         return z
-                    
+
     # insert new node into the unordered root list in O(1) time
     def insert(self, data):
         n = self.Node(data)
@@ -114,7 +114,7 @@ class FibonacciHeap:
         if self.min_node is None or n.data < self.min_node.data:
             self.min_node = n
         self.total_nodes += 1
-        
+
     # modify the data of some node in the heap in O(1) time
     def decrease_key(self, x, k):
         if k > x.data:
@@ -126,7 +126,7 @@ class FibonacciHeap:
             self.cascading_cut(y)
         if x.data < self.min_node.data:
             self.min_node = x
-            
+
     # merge two fibonacci heaps in O(1) time by concatenating the root lists
     # the root of the new root list becomes equal to the first list and the second
     # list is simply appended to the end (then the proper min node is determined)
@@ -145,7 +145,7 @@ class FibonacciHeap:
         # update total nodes
         H.total_nodes = self.total_nodes + h2.total_nodes
         return H
-        
+
     # if a child node becomes smaller than its parent node we
     # cut this child node off and bring it up to the root list
     def cut(self, x, y):
@@ -154,7 +154,7 @@ class FibonacciHeap:
         self.merge_with_root_list(x)
         x.parent = None
         x.mark = False
-    
+
     # cascading cut of parent node to obtain good time bounds
     def cascading_cut(self, y):
         z = y.parent
@@ -164,7 +164,7 @@ class FibonacciHeap:
             else:
                 self.cut(y, z)
                 self.cascading_cut(z)
-    
+
     # combine root nodes of equal degree to consolidate the heap
     # by creating a list of unordered binomial trees
     def consolidate(self):
@@ -173,8 +173,8 @@ class FibonacciHeap:
         for w in range(0, len(nodes)):
             x = nodes[w]
             d = x.degree
-            while A[d] != None:
-                y = A[d] 
+            while A[d] is not None:
+                y = A[d]
                 if x.data > y.data:
                     temp = x
                     x, y = y, temp
@@ -183,13 +183,13 @@ class FibonacciHeap:
                 d += 1
             A[d] = x
         # find new min node - no need to reconstruct new root list below
-        # because root list was iteratively changing as we were moving 
+        # because root list was iteratively changing as we were moving
         # nodes around in the above loop
         for i in range(0, len(A)):
             if A[i] is not None:
                 if A[i].data < self.min_node.data:
                     self.min_node = A[i]
-        
+
     # actual linking of one node to another in the root list
     # while also updating the child linked list
     def heap_link(self, y, x):
@@ -199,8 +199,8 @@ class FibonacciHeap:
         x.degree += 1
         y.parent = x
         y.mark = False
-        
-    # merge a node with the doubly linked root list   
+
+    # merge a node with the doubly linked root list
     def merge_with_root_list(self, node):
         if self.root_list is None:
             self.root_list = node
@@ -209,7 +209,7 @@ class FibonacciHeap:
             node.left = self.root_list
             self.root_list.right.left = node
             self.root_list.right = node
-            
+
     # merge a node with the doubly linked child list of a root node
     def merge_with_child_list(self, parent, node):
         if parent.child is None:
@@ -219,14 +219,14 @@ class FibonacciHeap:
             node.left = parent.child
             parent.child.right.left = node
             parent.child.right = node
-            
+
     # remove a node from the doubly linked root list
     def remove_from_root_list(self, node):
         if node == self.root_list:
             self.root_list = node.right
         node.left.right = node.right
         node.right.left = node.left
-        
+
     # remove a node from the doubly linked child list
     def remove_from_child_list(self, parent, node):
         if parent.child == parent.child.right:

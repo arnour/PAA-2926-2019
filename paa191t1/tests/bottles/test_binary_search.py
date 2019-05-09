@@ -63,6 +63,11 @@ class TestBinarySearch(unittest.TestCase):
             (True, 7, 1)
         ))
 
+    def test_should_find_lot_of_numbers(self):
+        assert_that(bottles(34, "1010111010101011001010101010010010"), equal_to(
+            (True, 49, 1)
+        ))
+
     def test_should_find_lot_of_zeros(self):
         assert_that(bottles(6, "010010"), equal_to(
             (True, 5, 2)

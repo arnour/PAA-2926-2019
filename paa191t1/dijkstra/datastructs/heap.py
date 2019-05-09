@@ -2,6 +2,7 @@ from paa191t1.dijkstra import datastructs
 import math
 import heapq
 
+
 class Heap(datastructs.DijkstraDistance):
 
     def __call__(self, nodes):
@@ -19,12 +20,10 @@ class Heap(datastructs.DijkstraDistance):
 
         return self
 
-
     def pop(self):
-        node_pair = heapq.heappop(self.__heap)        
+        node_pair = heapq.heappop(self.__heap)
 
         return node_pair[1], node_pair[0]
-
 
     def update(self, node, distance):
         if distance == 0:
@@ -34,9 +33,8 @@ class Heap(datastructs.DijkstraDistance):
 
         else:
             self.__distances[node] = distance
-            
-            heapq.heappush(self.__heap, [self.__distances[node], node])
 
+            heapq.heappush(self.__heap, [self.__distances[node], node])
 
     def has_nodes_to_visit(self):
         """bool: Retorna verdadeiro se existe algum nó que ainda não foi visitado. Do contrário, falso."""

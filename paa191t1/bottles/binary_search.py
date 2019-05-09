@@ -49,7 +49,7 @@ def bottles(max_height, break_point):
 
         else:
             # nesse caso a garrafa não quebra, então tentamos aumentar um pouco o número para que quebre.
-            # para aumentar o número como na busca binária em potência de 2, precisamos colocar o 
+            # para aumentar o número como na busca binária em potência de 2, precisamos colocar o
             # segundo maior bit que ainda estava como False como True.
             ref_bits[zero_to_change] = True
             one_to_move = zero_to_change
