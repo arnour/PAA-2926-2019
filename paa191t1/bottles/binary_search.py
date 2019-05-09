@@ -42,6 +42,7 @@ def bottles(max_height, break_point):
             ref_bits[one_to_move] = False
             ref_bits[one_to_move + 1] = True
             one_to_move += 1
+            zero_to_change = one_to_move
 
         elif ref_bits == break_point_bits:
             # encontramos a posição ótima aonde o frasco quebra.
