@@ -17,3 +17,8 @@ class TestBitArray(unittest.TestCase):
         bits = BitArray("110")
         expected = BitArray("100")
         assert_that(bits << 1, equal_to(expected))
+
+    def test_should_print_as_bits(self):
+        bits = BitArray("100")
+        expected = "BitArray('100')"
+        assert_that(bits.__repr__(), equal_to(expected))
