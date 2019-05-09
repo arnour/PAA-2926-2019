@@ -3,7 +3,7 @@ from hamcrest import (
     assert_that,
     equal_to
 )
-from paa191t1.bottles import max_trials
+from paa191t1.bottles.bottles import max_trials
 
 
 class TestBottlesMaxTrials(unittest.TestCase):

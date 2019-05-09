@@ -3,7 +3,7 @@ from hamcrest import (
     assert_that,
     equal_to
 )
-from paa191t1.bottles import bottles
+from paa191t1.bottles.bottles import bottles
 
 
 class TestBottlesK2(unittest.TestCase):
