@@ -4,4 +4,7 @@ from paa191t1.tests.dijkstra.test_dijkstra import TestDijkstraBase
 
 class TestDijkstraVector(TestDijkstraBase):
 
-    struct = Vector()
+    _SKIP = False
+
+    def setUp(self):
+        self.struct = Vector()

@@ -4,4 +4,7 @@ from paa191t1.tests.dijkstra.test_dijkstra import TestDijkstraBase
 
 class TestDijkstraBuckets(TestDijkstraBase):
 
-    struct = Buckets()
+    _SKIP = False
+
+    def setUp(self):
+        self.struct = Buckets()
