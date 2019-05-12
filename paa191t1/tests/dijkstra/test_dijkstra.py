@@ -6,15 +6,17 @@ from hamcrest import (
 )
 import math
 import networkx as nx
-from unittest import TestCase, skip
+from paa191t1.tests import TestBase
 from paa191t1.dijkstra.datastructs import graph, DijkstraDistance
 from paa191t1.dijkstra import dijkstra
 
 
-@skip("Base Class")
-class TestDijkstraBase(TestCase):
+class TestDijkstraBase(TestBase):
 
-    struct = DijkstraDistance()
+    _SKIP = True
+
+    def setUp(self):
+        self.struct = DijkstraDistance()
 
     def test_should_return_shortest_distances_and_predecessors_for_equally_weighted_graph_with_one_path(self):
 
