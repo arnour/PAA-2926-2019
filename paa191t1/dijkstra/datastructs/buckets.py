@@ -1,5 +1,5 @@
 import math
-from pyllist import dllist
+from pyllist import dllist, dllistnode
 from paa191t1.dijkstra import datastructs
 
 
@@ -33,6 +33,23 @@ class Buckets(datastructs.DijkstraDistance):
         self._non_visited.remove(node)
         return node, smallest
 
+    def __get_node(self, _dllist, value):
+        """Pega objeto do nó na lista duplamente encadeada.
+        
+        Args:
+            _dllist (dllist): lista duplamente encadeada a ser buscada
+            value (int): valor a buscar na lista
+        
+        Returns:
+            dllistnode: nó buscado.
+        """
+        node = _dllist.first
+        while node.next is not None:
+            if node.value == value:
+                break
+            node = node.next
+        return node
+
     def update(self, node, distance):
         """Atualiza a distância de um nó no seu bucket correto.
 
@@ -45,7 +62,8 @@ class Buckets(datastructs.DijkstraDistance):
         """
         last_bucket = self._d_vector[node]
         self._d_vector[node] = distance
-        self._buckets[last_bucket].remove(node)
+        node_obj = self.__get_node(self._buckets[last_bucket], node)
+        self._buckets[last_bucket].remove(node_obj)
         if self._buckets.get(distance):
             self._buckets[distance].append(node)
         else:
