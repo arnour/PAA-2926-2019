@@ -53,7 +53,7 @@ class TestDijkstraBase(TestBase):
         assert_that(predecessors, has_length(3))
         assert_that(
             predecessors,
-            has_entries({1: 0, 2: 0, 3: 2})
+            any_of(has_entries({1: 0, 2: 0, 3: 2}), has_entries({1: 0, 2: 0, 3: 1}))
         )
 
     def test_should_return_shortest_distances_and_predecessors_for_differently_weighted_graph_with_many_paths(self):
