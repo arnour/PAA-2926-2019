@@ -103,12 +103,12 @@ class TestDijkstraBase(TestBase):
         dg.add_node(1)
         dg.add_node(2)
 
-        distances, predecessors = dijkstra(graph=graph.Graph(dg), source_node=1, distance_struct=self.struct)
+        distances, predecessors = dijkstra(graph=graph.Graph(dg), source_node=0, distance_struct=self.struct)
 
         assert_that(distances, has_length(3))
         assert_that(
             distances,
-            has_entries({1: 0, 2: math.inf, 3: math.inf})
+            has_entries({0: 0, 1: math.inf, 2: math.inf})
         )
 
         assert_that(predecessors, empty())
