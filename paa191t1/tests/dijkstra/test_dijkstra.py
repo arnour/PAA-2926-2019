@@ -99,9 +99,9 @@ class TestDijkstraBase(TestBase):
     def test_should_return_shortest_distances_and_predecessors_for_graph_with_unreachble_nodes(self):
 
         dg = nx.DiGraph()
+        dg.add_node(0)
         dg.add_node(1)
         dg.add_node(2)
-        dg.add_node(3)
 
         distances, predecessors = dijkstra(graph=graph.Graph(dg), source_node=1, distance_struct=self.struct)
 
