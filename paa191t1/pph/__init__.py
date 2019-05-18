@@ -14,9 +14,8 @@ class Pair(object):
 
     __repr__ = __str__
 
-    @staticmethod
-    def of(a, b):
-        return Pair(a, b)
+    def as_tuple(self):
+        return (self.a, self.b, self.r)
 
 
 class HiperbolicSet(object):
@@ -54,7 +53,7 @@ class HiperbolicSet(object):
         return self.__ra / self.__rb
 
 
-def pph(n, t0):
+def pph_n_2(n, t0):
     s = HiperbolicSet(t0.a, t0.b)
     i = 0
     while i < len(n):
@@ -67,4 +66,18 @@ def pph(n, t0):
         elif index > -1 and t.r < s.r:
             s.remove(index)
             i = 0
+    return s
+
+
+def pph_n_lg_n(n, t0):
+    s = HiperbolicSet(t0.a, t0.b)
+    n.sort(key=lambda x: x.r, reverse=True)  # Utiliza TimSorte com complexidade n log n para ordenar os pares pela razao do maior para o menor
+    i = 0
+    while i < len(n):
+        t = n[i]
+        i += 1
+        if t.r >= s.r:
+            s.add(t)
+        else:
+            i = len(n)
     return s
