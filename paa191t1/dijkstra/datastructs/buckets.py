@@ -1,5 +1,5 @@
 import math
-from pyllist import dllist, dllistnode
+from pyllist import dllist
 from paa191t1.dijkstra import datastructs
 
 
