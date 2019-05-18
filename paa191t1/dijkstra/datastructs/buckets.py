@@ -35,11 +35,11 @@ class Buckets(datastructs.DijkstraDistance):
 
     def __get_node(self, _dllist, value):
         """Pega objeto do nó na lista duplamente encadeada.
-        
+
         Args:
             _dllist (dllist): lista duplamente encadeada a ser buscada
             value (int): valor a buscar na lista
-        
+
         Returns:
             dllistnode: nó buscado.
         """
