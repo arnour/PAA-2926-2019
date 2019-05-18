@@ -8,14 +8,35 @@ def get_r(s, a0, b0):
     return sum_a / sum_b
 
 
-def pph(n, a0=0, b0=0):
+def pph(n, a0, b0):
     s = []
     r = get_r(s, a0, b0)
 
-    for (a, b) in n:
-        if (a, b) not in s and get_r([], a, b) > r:
-            s.append((a, b))
-        elif (a, b) not in s and get_r([], a, b) < r:
-            s.remove((a, b))
-        r = get_r(s, a0, b0)
-    return s, r
+    print(a0, b0, s, r)
+    changed = True
+    while changed:  
+        changed = False      
+        for (a, b) in n:
+            curr_r = get_r([], a, b)
+            if (a, b) not in s and curr_r > r:
+                s.append((a, b))
+                changed = True
+            elif (a, b) in s and curr_r < r:
+                s.remove((a, b))
+                changed = True
+            if changed:
+                r = get_r(s, a0, b0)
+                print("s:", s, "rmax:", r, "a:", a, "b:", b, "r:", curr_r)
+                break        
+    return a0, b0, s, r
+
+n = [
+    (2, 5),
+    (1, 3),
+    (3, 8),
+    (6, 6),
+    (5, 16)
+]
+
+print(pph(n, 2, 17))
+print(n)
