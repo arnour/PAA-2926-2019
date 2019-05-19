@@ -50,7 +50,7 @@ class TestMedianOfMedians(TestCase):
         )
 
     def test_should_find_random_list_number_with_more_than_10_numbers(self):
-        test_list = [random.randint(1, 100) for i in range(100)]
+        test_list = [random.randint(1, 100) for i in range(101)]
         expected = sorted(test_list)[len(test_list) // 2]
         assert_that(
             median_of_medians(test_list),

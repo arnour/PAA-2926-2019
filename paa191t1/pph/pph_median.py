@@ -6,6 +6,19 @@ logger = logging.getLogger("pph")
 
 
 def pph_median(n, t0):
+    """
+    O algoritmo recebe uma lista n com pares de coordenadas (a, b) e retorna uma lista s, somente com as
+    coordenadas que juntas tenham uma razão máxima do tipo r = ((a0 + a1 + ... + an) / (b0 + b1 + ... + bn)).
+
+    
+
+        Args:
+        n (list[Pair]): Lista com coordenadas do tipo Pair.
+        t0 (Pair): a0 e b0 iniciais de referência para o algoritmo.
+
+    Returns:
+        s (list[Pair]): Lista com coordenadas que maximizam a razão r.
+    """
     s = HiperbolicSet(t0.a, t0.b)
     a = []
     b = []

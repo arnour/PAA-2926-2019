@@ -165,11 +165,31 @@ class TestPPH(TestBase):
 
     def test_should_works_removing_all_elements_except_one(self):
         n = [
+            Pair(5, 16),
             Pair(2, 5),
             Pair(1, 3),
-            Pair(3, 9),
-            Pair(5, 16),
             Pair(16, 16),
+            Pair(3, 9),
+        ]
+
+        s = self.pph(n, Pair(2, 17))
+
+        assert_that(
+            s.values,
+            equal_to([
+                Pair(16, 16)
+            ])
+        )
+
+        assert_that(s.r, close_to(0.54, delta=0.05))
+
+    def test_should_works_removing_all_elements_except_one2(self):
+        n = [
+            Pair(5, 16),
+            Pair(2, 5),
+            Pair(1, 2),
+            Pair(16, 16),
+            Pair(3, 9),
         ]
 
         s = self.pph(n, Pair(2, 17))
