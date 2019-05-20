@@ -165,7 +165,7 @@ def pph_med2(a0, b0, a, b, K):
     I1 = []
     a_ = a0
     b_ = b0
-    
+
     ab = [a[i] / b[i] for i in K]
     KK = []
     for k, i in enumerate(K):
@@ -187,7 +187,7 @@ def pph_med2(a0, b0, a, b, K):
         K1 = []
         K01 = []
         K0 = []
-        for i in K:         
+        for i in K:
             if ab[i] > ab[j]:
                 K1.append(i)
             elif ab[i] == ab[j]:
@@ -239,7 +239,7 @@ def pph_med2(a0, b0, a, b, K):
                 b_ = b__
                 execute = True
                 continue
-        
+
         # if len(K) == 0:
         #     execute = False
     return I1
