@@ -8,3 +8,4 @@ class TestPPHNLGN(TestPPH):
 
     def setUp(self):
         self.pph = pph_n_lg_n
+        self.pivot = None
