@@ -25,7 +25,7 @@ def pph_n_2(n, t0):
         index = s.index(t)  # O(s)
         if index == -1 and t.r > s.r:
             s.add(t)
-    
+
     # Se a coordenada já estiver na lista s e a razão for menor que a razão da lista s,
     # então remove da lista.
     i = 0

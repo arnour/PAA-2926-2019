@@ -50,7 +50,7 @@ class HiperbolicSet(object):
         t = self.__values.pop(index)
         self.__ra -= t.a
         self.__rb -= t.b
-    
+
     def __getitem__(self, index):
         return self.__values[index]
 

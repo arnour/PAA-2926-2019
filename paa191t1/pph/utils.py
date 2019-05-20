@@ -1,3 +1,18 @@
+def median_bounds(K, compare):
+    lt_compare = []
+    eq_to_compare = []
+    gt_compare = []
+    for element in K:
+        if element < compare:
+            lt_compare.append(element)
+        elif element == compare:
+            eq_to_compare.append(element)
+        else:
+            gt_compare.append(element)
+
+    return lt_compare, eq_to_compare, gt_compare
+
+
 def median_of_medians(L, k=None):
     """
     Pega o elemento mediano em uma lista em O(n)
@@ -22,16 +37,7 @@ def median_of_medians(L, k=None):
     mom = median_of_medians(medians, (len(medians) - 1) // 2)
 
     # Verifica elementos maiores, menores e iguais a mediana.
-    lt_mom = []
-    eq_to_mom = []
-    gt_mom = []
-    for element in L:
-        if element < mom:
-            lt_mom.append(element)
-        elif element == mom:
-            eq_to_mom.append(element)
-        else:
-            gt_mom.append(element)
+    lt_mom, eq_to_mom, gt_mom = median_bounds(L, mom)
 
     if (k < len(lt_mom)):
         # Caso o índice k do elemento seja menor ou igual a lista de menores que ele,
