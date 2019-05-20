@@ -13,7 +13,8 @@ class TestPPH(TestBase):
     _SKIP = True
 
     def setUp(self):
-        self.pph = lambda n, t: None
+        self.pph = lambda n, t, p: None
+        self.pivot = None
 
     def test_should_define_s(self):
         n = [
@@ -24,7 +25,7 @@ class TestPPH(TestBase):
             Pair(5, 16)
         ]
 
-        s = self.pph(n, Pair(2, 17))
+        s = self.pph(n, Pair(2, 17), self.pivot)
 
         assert_that(
             sorted(s.values, key=lambda x: x.r, reverse=True),
@@ -37,7 +38,7 @@ class TestPPH(TestBase):
 
         assert_that(s.r, close_to(0.36, delta=0.05))
 
-        s = self.pph(n, Pair(4, 8))
+        s = self.pph(n, Pair(4, 8), self.pivot)
 
         assert_that(
             s.values,
@@ -57,7 +58,7 @@ class TestPPH(TestBase):
             Pair(5, 16)
         ]
 
-        s = self.pph(n, Pair(100, 10))
+        s = self.pph(n, Pair(100, 10), self.pivot)
 
         assert_that(s.values, empty())
         assert_that(s.r, equal_to(10.0))
@@ -71,7 +72,7 @@ class TestPPH(TestBase):
             Pair(6, 12)
         ]
 
-        s = self.pph(n, Pair(6, 6))
+        s = self.pph(n, Pair(6, 6), self.pivot)
 
         assert_that(s.values, empty())
         assert_that(s.r, equal_to(1.0))
@@ -86,7 +87,7 @@ class TestPPH(TestBase):
             Pair(9, 5)
         ]
 
-        s = self.pph(n, Pair(1, 5))
+        s = self.pph(n, Pair(1, 5), self.pivot)
 
         assert_that(
             sorted(s.values, key=lambda x: x.r, reverse=True),
@@ -103,7 +104,7 @@ class TestPPH(TestBase):
 
         n = [Pair(i * i, i) for i in range(1, 150)]
 
-        s = self.pph(n, Pair(15, 3))
+        s = self.pph(n, Pair(15, 3), self.pivot)
         assert_that(
             sorted(s.values, key=lambda x: x.r, reverse=True),
             equal_to([
@@ -124,7 +125,7 @@ class TestPPH(TestBase):
             Pair(4, 3)
         ]
 
-        s = self.pph(n, Pair(1, 5))
+        s = self.pph(n, Pair(1, 5), self.pivot)
 
         assert_that(
             sorted(s.values, key=lambda x: x.r, reverse=True),
@@ -148,7 +149,7 @@ class TestPPH(TestBase):
             Pair(5, 16)
         ]
 
-        s = self.pph(n, Pair(10, 100))
+        s = self.pph(n, Pair(10, 100), self.pivot)
 
         assert_that(
             sorted(s.values, key=lambda x: x.r, reverse=True),
@@ -172,7 +173,7 @@ class TestPPH(TestBase):
             Pair(3, 9),
         ]
 
-        s = self.pph(n, Pair(2, 17))
+        s = self.pph(n, Pair(2, 17), self.pivot)
 
         assert_that(
             s.values,
@@ -192,7 +193,7 @@ class TestPPH(TestBase):
             Pair(3, 9),
         ]
 
-        s = self.pph(n, Pair(2, 17))
+        s = self.pph(n, Pair(2, 17), self.pivot)
 
         assert_that(
             s.values,
@@ -212,7 +213,7 @@ class TestPPH(TestBase):
             Pair(5, 16),
         ]
 
-        s = self.pph(n, Pair(2, 17))
+        s = self.pph(n, Pair(2, 17), self.pivot)
 
         assert_that(
             sorted(s.values, key=lambda x: x.r, reverse=True),
