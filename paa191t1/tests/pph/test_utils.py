@@ -61,6 +61,6 @@ class TestMedianOfMedians(TestCase):
         a0 = 2
         b0 = 17
         assert_that(
-            custom_pivot(None, n, a0, b0),
+            custom_pivot(n, 0, a0, b0),
             equal_to(expected)
         )

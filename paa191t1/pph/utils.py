@@ -61,7 +61,7 @@ def custom_pivot(L, k=None, a0=0, b0=0):
     """
     sum_a = a0
     sum_b = b0
-    for pair in k:
+    for pair in L:
         sum_a += pair.a
         sum_b += pair.b
     return Pair(sum_a, sum_b)
