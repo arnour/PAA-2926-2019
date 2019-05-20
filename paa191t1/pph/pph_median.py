@@ -27,10 +27,7 @@ def pph_median(n, t0, pivot_function=median_of_medians):
         if item.r > t0.r:
             k.append(item)
 
-    execute = True
-    while execute and len(k) > 0:
-        execute = False
-
+    while len(k) > 0:
         # Encontra como pivot o elemento mediano
         pivot = pivot_function(k)
 
@@ -48,24 +45,24 @@ def pph_median(n, t0, pivot_function=median_of_medians):
         # upper_bounds para não incluir os elementos iguais ao elemento mediano em s.
         if len(upper_bounds) > 0 and ((a__ / b__) > pivot.r):
             k = upper_bounds
-            execute = True
-            continue
+        else:
+            # No caso da razão dos elementos medianos serem maiores, eles são incluídos na lista final também.
+            s.add_all(upper_bounds + equal_bounds)
 
-        # No caso da razão dos elementos medianos serem maiores, eles são incluídos na lista final também.
-        s.add_all(upper_bounds + equal_bounds)
-
-        # Precisamos verificar também nos lower_bounds se existem outros elementos que deveriam entrar na
-        # lista s.
-        if len(lower_bounds) > 0:
-            max_of_lowers = max(lower_bounds)
-            # Se o maior dos elementos tiver uma razão maior que a acumulada, quer dizer que realmente
-            # existem mais elementos que estão no lower_bounds que devem entrar na lista s.
-            if max_of_lowers.r > (a__ / b__):
-                # Fazemos o k ser só o lower_bounds, já que já adicionamos o resto, e repetimos o loop
-                # com o k reduzido.
-                k = lower_bounds
-                a = a__
-                b = b__
-                execute = True
-                continue
+            # Precisamos verificar também nos lower_bounds se existem outros elementos que deveriam entrar na
+            # lista s.
+            if len(lower_bounds) > 0:
+                max_of_lowers = max(lower_bounds)
+                # Se o maior dos elementos tiver uma razão maior que a acumulada, quer dizer que realmente
+                # existem mais elementos que estão no lower_bounds que devem entrar na lista s.
+                if max_of_lowers.r > (a__ / b__):
+                    # Fazemos o k ser só o lower_bounds, já que já adicionamos o resto, e repetimos o loop
+                    # com o k reduzido.
+                    k = lower_bounds
+                    a = a__
+                    b = b__
+                else:
+                    break
+            else:
+                break
     return s
