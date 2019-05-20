@@ -13,7 +13,7 @@ def median_bounds(K, compare):
     return lt_compare, eq_to_compare, gt_compare
 
 
-def median_of_medians(L, k=None):
+def median_of_medians(L, k=None, *args, **kwargs):
     """
     Pega o elemento mediano em uma lista em O(n)
     """
