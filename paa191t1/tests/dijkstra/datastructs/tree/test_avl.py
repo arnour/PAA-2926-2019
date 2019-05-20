@@ -113,3 +113,45 @@ class TestAVL(TestBase):
         assert_that(tree.root.right, equal_to(7))
         assert_that(tree.root.right.left, equal_to(5))
         assert_that(tree.root.right.right, equal_to(None))
+
+    def test_should_find_and_delete(self):
+        tree = Tree()
+
+        tree.insert(0)
+        tree.insert(1)
+        tree.insert(2)
+
+        removed = tree.find_min().delete()
+
+        assert_that(removed, equal_to(0))
+
+        assert_that(tree.root.height, equal_to(1))
+        assert_that(tree.root, equal_to(1))
+        assert_that(tree.root.left, equal_to(None))
+        assert_that(tree.root.right, equal_to(2))
+
+    def test_should_find_and_delete_all(self):
+
+        tree = Tree()
+
+        tree.insert(0)
+        tree.insert(1)
+        tree.insert(2)
+
+        for i in range(3):
+            tree.delete(i)
+
+        assert_that(tree.root, equal_to(None))
+
+    def test_should_find_min_and_delete_all(self):
+
+        tree = Tree()
+
+        tree.insert(0)
+        tree.insert(1)
+        tree.insert(2)
+
+        for _ in range(3):
+            tree.delete_min()
+
+        assert_that(tree.root, equal_to(None))

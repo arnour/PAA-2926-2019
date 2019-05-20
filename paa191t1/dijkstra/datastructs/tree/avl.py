@@ -1,3 +1,5 @@
+from paa191t1.dijkstra.datastructs.tree import TreeTraversal
+
 """
     Python AVL tree example based on
 
@@ -172,6 +174,7 @@ class AVL(object):
     def __init__(self):
         """ empty tree """
         self.root = None
+        self.traversal = TreeTraversal()
 
     def __str__(self):
         if self.root is None:
@@ -276,17 +279,7 @@ class AVL(object):
             self.root.insert(node)
         self.rebalance(node)
 
-    def delete(self, k):
-        """Deletes and returns a node with key k if it exists from the BST.
-        This AVL version guarantees the balance property: h = O(lg n).
-
-        Args:
-            k: The key of the node that we want to delete.
-
-        Returns:
-            The deleted node with key k.
-        """
-        node = self.find(k)
+    def __delete(self, node):
         if node is None:
             return None
         if node is self.root:
@@ -302,3 +295,27 @@ class AVL(object):
         # node.parent is actually the old parent of the node,
         # which is the first potentially out-of-balance node.
         self.rebalance(deleted.parent)
+        return deleted
+
+    def delete(self, k):
+        """Deletes and returns a node with key k if it exists from the BST.
+        This AVL version guarantees the balance property: h = O(lg n).
+
+        Args:
+            k: The key of the node that we want to delete.
+
+        Returns:
+            The deleted node with key k.
+        """
+        return self.__delete(self.find(k))
+
+    def delete_min(self):
+        """Deletes and returns the min node if it exists from the BST.
+
+        Returns:
+            The deleted node.
+        """
+        return self.__delete(self.find_min())
+
+    def inorder(self):
+        return self.traversal.inorder(self.root)
