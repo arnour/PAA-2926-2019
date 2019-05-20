@@ -7,8 +7,8 @@ def pph_median(n, t0, pivot_function=median_of_medians):
     O algoritmo recebe uma lista n com pares de coordenadas (a, b) e retorna uma lista s, somente com as
     coordenadas que juntas tenham uma razão máxima do tipo r = ((a0 + a1 + ... + an) / (b0 + b1 + ... + bn)).
 
-    Esse algoritmo dá somente uma passada na lista n verificando o que deve estar na lista s através de um pivot.
-    No caso como padrão utiliza a mediana das medianas
+    Esse algoritmo dá somente uma passada na lista n O(n) verificando o que deve estar na lista s através de um pivot.
+    No caso como padrão utiliza a mediana das medianas.
 
         Args:
         n (list[Pair]): Lista com coordenadas do tipo Pair.
