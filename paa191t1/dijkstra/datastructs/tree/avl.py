@@ -56,8 +56,7 @@ class AVLNode(object):
         if label[-1] == '.':
             label = label[:-1] + ' '
         lines = [' ' * left_pos + label + ' ' * (right_width - right_pos),
-                 ' ' * left_pos + '/' + ' ' * (middle - 2) +
-                 '\\' + ' ' * (right_width - right_pos)] + \
+                 ' ' * left_pos + '/' + ' ' * (middle - 2) + '\\' + ' ' * (right_width - right_pos)] + \
             [left_line + ' ' * (width - left_width - right_width) + right_line
              for left_line, right_line in zip(left_lines, right_lines)]
         return lines, pos, width

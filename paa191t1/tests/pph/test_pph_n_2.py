@@ -1,4 +1,4 @@
-from paa191t1.pph import pph_n_2
+from paa191t1.pph.pph_n_2 import pph_n_2
 from paa191t1.tests.pph import TestPPH
 
 

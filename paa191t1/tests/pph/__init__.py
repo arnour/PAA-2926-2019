@@ -104,7 +104,6 @@ class TestPPH(TestBase):
         n = [Pair(i * i, i) for i in range(1, 150)]
 
         s = self.pph(n, Pair(15, 3))
-        print(s)
         assert_that(
             sorted(s.values, key=lambda x: x.r, reverse=True),
             equal_to([
@@ -163,3 +162,65 @@ class TestPPH(TestBase):
         )
 
         assert_that(s.r, close_to(0.19, delta=0.05))
+
+    def test_should_works_removing_all_elements_except_one(self):
+        n = [
+            Pair(5, 16),
+            Pair(2, 5),
+            Pair(1, 3),
+            Pair(16, 16),
+            Pair(3, 9),
+        ]
+
+        s = self.pph(n, Pair(2, 17))
+
+        assert_that(
+            s.values,
+            equal_to([
+                Pair(16, 16)
+            ])
+        )
+
+        assert_that(s.r, close_to(0.54, delta=0.05))
+
+    def test_should_works_removing_all_elements_except_one2(self):
+        n = [
+            Pair(5, 16),
+            Pair(2, 5),
+            Pair(1, 2),
+            Pair(16, 16),
+            Pair(3, 9),
+        ]
+
+        s = self.pph(n, Pair(2, 17))
+
+        assert_that(
+            s.values,
+            equal_to([
+                Pair(16, 16)
+            ])
+        )
+
+        assert_that(s.r, close_to(0.54, delta=0.05))
+
+    def test_should_works_with_poggi_trials(self):
+        n = [
+            Pair(2, 5),
+            Pair(1, 3),
+            Pair(3, 8),
+            Pair(6, 6),
+            Pair(5, 16),
+        ]
+
+        s = self.pph(n, Pair(2, 17))
+
+        assert_that(
+            sorted(s.values, key=lambda x: x.r, reverse=True),
+            equal_to([
+                Pair(6, 6),
+                Pair(2, 5),
+                Pair(3, 8)
+            ])
+        )
+
+        assert_that(s.r, close_to(0.36, delta=0.01))
