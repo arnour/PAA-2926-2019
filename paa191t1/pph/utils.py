@@ -1,3 +1,6 @@
+from paa191t1.pph import Pair
+
+
 def median_bounds(K, compare):
     lt_compare = []
     eq_to_compare = []
@@ -50,3 +53,15 @@ def median_of_medians(L, k=None, *args, **kwargs):
         return median_of_medians(gt_mom, k - len(lt_mom) - len(eq_to_mom))
     else:
         return mom  # Sendo igual retorna a própria mediana das medianas
+
+
+def custom_pivot(L, k=None, a0=0, b0=0):
+    """
+    Calcula um pivot customizado em O(n)
+    """
+    sum_a = a0
+    sum_b = b0
+    for pair in k:
+        sum_a += pair.a
+        sum_b += pair.b
+    return Pair(sum_a, sum_b)

@@ -1,5 +1,6 @@
 from unittest import TestCase
-from paa191t1.pph.utils import median_of_medians
+from paa191t1.pph import Pair
+from paa191t1.pph.utils import median_of_medians, custom_pivot
 from hamcrest import (
     assert_that,
     equal_to
@@ -45,5 +46,21 @@ class TestMedianOfMedians(TestCase):
         expected = 9
         assert_that(
             median_of_medians(test_list),
+            equal_to(expected)
+        )
+
+    def test_should_find_custom_pivot_with_pairs_without_order(self):
+        n = [
+            Pair(2, 5),
+            Pair(1, 3),
+            Pair(3, 8),
+            Pair(6, 6),
+            Pair(5, 16)
+        ]
+        expected = Pair(19, 55)
+        a0 = 2
+        b0 = 17
+        assert_that(
+            custom_pivot(None, n, a0, b0),
             equal_to(expected)
         )
