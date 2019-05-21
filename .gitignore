@@ -107,3 +107,13 @@ venv.bak/
 
 #IDE
 .vscode/
+
+#Dataset
+data/
+!data/inputs/bottles/.keep
+!data/inputs/dijkstra/.keep
+!data/inputs/pph/.keep
+!data/results/bottles/.keep
+!data/results/dijkstra/.keep
+!data/results/pph/.keep
+gera_pph
