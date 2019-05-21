@@ -17,7 +17,7 @@ def test_and_save(filename, instance_name, n, times, function, *args, **kwargs):
         function(*args, **kwargs)
         timer.stop()
         time_lapse = timer.get_time("total", "milliseconds")
-        subprocess.call(f"echo '{instance_name},{n},{time_lapse}' >> {result_folder}/{filename}", shell=True)
+        subprocess.call(f"echo '{instance_name},{n},{time_lapse}\n' >> {result_folder}/{filename}", shell=True)
 
 
 ## Dijkstra
