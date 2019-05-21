@@ -9,7 +9,7 @@ class Heap(datastructs.DijkstraDistance):
 
         self.__nodes = []
 
-        self.__distances = [None] * len(nodes)
+        self.__distances = [None] * (max(nodes) + 1)
 
         self.__heap = []
 
