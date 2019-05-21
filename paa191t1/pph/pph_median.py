@@ -2,7 +2,7 @@ from paa191t1.pph import HiperbolicSet
 from paa191t1.pph.utils import median_of_medians, median_bounds
 
 
-def pph_median(n, t0, pivot_function=median_of_medians):
+def pph_median(n, t0):
     """
     O algoritmo recebe uma lista n com pares de coordenadas (a, b) e retorna uma lista s, somente com as
     coordenadas que juntas tenham uma razão máxima do tipo r = ((a0 + a1 + ... + an) / (b0 + b1 + ... + bn)).
@@ -29,7 +29,7 @@ def pph_median(n, t0, pivot_function=median_of_medians):
 
     while len(k) > 0:
         # Encontra como pivot o elemento mediano
-        pivot = pivot_function(k, None, t0.a, t0.b)
+        pivot = median_of_medians(k, None, t0.a, t0.b)
 
         # Faz comparativo dessa mediana com todos os elementos da lista. O(n)
         lower_bounds, equal_bounds, upper_bounds = median_bounds(k, pivot)

@@ -1,7 +1,7 @@
 from paa191t1.pph import HiperbolicSet
 
 
-def pph_n_lg_n(n, t0, p=None):
+def pph_n_lg_n(n, t0):
     """
     O algoritmo recebe uma lista n com pares de coordenadas (a, b) e retorna uma lista s, somente com as
     coordenadas que juntas tenham uma razão máxima do tipo r = ((a0 + a1 + ... + an) / (b0 + b1 + ... + bn)).
