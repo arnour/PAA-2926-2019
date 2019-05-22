@@ -6,10 +6,6 @@ def bottles(max_height, break_point):
 
     Com essas informações o algoritmo tenta encontrar a altura de quebra de maneira ótima respeitando as restrições.
 
-    Este algoritmo conta com uma restrição:
-
-    - O número de tentativas no pior caso que podem ser executadas.
-
     Args:
         max_height (long): O número de bits que representa a altura máxima
         break_point (str): A altura onde o frasco quebra de fato em bits. Portanto, a altura a ser encontrada.

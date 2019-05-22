@@ -6,10 +6,6 @@ def bottles(max_height, break_point):
 
     Com essas informações o algoritmo tenta encontrar a altura de quebra de maneira ótima respeitando as restrições.
 
-    Este algoritmo conta com uma restrição:
-
-    - O número de tentativas no pior caso que podem ser executadas.
-
     Args:
         max_height (long): O número de bits que representa a altura máxima
         break_point (str): A altura onde o frasco quebra de fato em bits. Portanto, a altura a ser encontrada.
@@ -18,27 +14,37 @@ def bottles(max_height, break_point):
         bool, int, int: encontrado, tentativas usadas, frascos usados
     """
 
+    # Convertemos para decimal a entrada
     decimal_break_point = int(break_point, 2)
-    used_trials = used_bottles = 0
     upper_bound = int(max_height * "1", 2)
     lower_bound = 0
+    used_trials = used_bottles = 0
     pivot = upper_bound // 2
     found = False
 
     while not found:
         used_trials += 1
-        if pivot > decimal_break_point:
+
+        # Se quebrou a garrafa então é porque está a cima do breakpoint e precisamos
+        # diminuir o upper_bound.
+        if pivot >= decimal_break_point:
             used_bottles += 1
             upper_bound = pivot - 1
-            print(pivot, decimal_break_point, upper_bound, lower_bound)
 
+            # Precisamos validar se o anterior quebra também. Se não quebrar, então achamos.
+            # Quebrando continuamos a busca.
+            used_trials += 1
+            if (pivot - 1) < decimal_break_point:
+                found = True
+            else:
+                used_bottles += 1
+
+        # Caso não quebre só continuamos a busca aumentando o lower_bound
         elif pivot < decimal_break_point:
-            lower_bound = pivot + 1 
-            print(pivot, decimal_break_point, upper_bound, lower_bound)
-    
-        else:
-            used_bottles += 1
-            found = True
+            lower_bound = pivot + 1
+
+        # O pivot é sempre metade do upper_bound e lower_bound para garantir a propriedade
+        # de busca binária.
         pivot = (upper_bound + lower_bound) // 2
 
     return found, used_trials, used_bottles
