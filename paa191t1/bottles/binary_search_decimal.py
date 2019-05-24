@@ -16,18 +16,24 @@ def bottles(max_height, break_point):
 
     # Convertemos para decimal a entrada
     decimal_break_point = int(break_point, 2)
-    upper_bound = int(max_height * "1", 2)
-    lower_bound = 0
+    max_bound = upper_bound = int(max_height * "1", 2)
+    min_bound = lower_bound = 0
     used_trials = used_bottles = 0
     pivot = upper_bound // 2
     found = False
 
     while not found:
         used_trials += 1
-
+        
+        if (pivot == max_bound) or (pivot == min_bound):
+            # Não precisamos gastar uma tentativa ou garrafa aqui porque estão nas pontas 
+            # e são os últimos números que a busca binária vai testar
+            used_trials -= 1
+            found = True
+            
         # Se quebrou a garrafa então é porque está a cima do breakpoint e precisamos
         # diminuir o upper_bound.
-        if pivot >= decimal_break_point:
+        elif pivot >= decimal_break_point:
             used_bottles += 1
             upper_bound = pivot - 1
 
