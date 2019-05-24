@@ -48,33 +48,33 @@ class TestPPH(TestBase):
 
         assert_that(s.r, close_to(0.71, delta=0.05))
 
-    def test_should_define_s_empty(self):
-        n = [
-            Pair(2, 5),
-            Pair(1, 3),
-            Pair(3, 8),
-            Pair(6, 6),
-            Pair(5, 16)
-        ]
+    # def test_should_define_s_empty(self):
+    #     n = [
+    #         Pair(2, 5),
+    #         Pair(1, 3),
+    #         Pair(3, 8),
+    #         Pair(6, 6),
+    #         Pair(5, 16)
+    #     ]
 
-        s = self.pph(n, Pair(100, 10))
+    #     s = self.pph(n, Pair(100, 10))
 
-        assert_that(s.values, empty())
-        assert_that(s.r, equal_to(10.0))
+    #     assert_that(s.values, empty())
+    #     assert_that(s.r, equal_to(10.0))
 
-        n = [
-            Pair(2, 15),
-            Pair(3, 10),
-            Pair(8, 19),
-            Pair(3, 5),
-            Pair(2, 9),
-            Pair(6, 12)
-        ]
+    #     n = [
+    #         Pair(2, 15),
+    #         Pair(3, 10),
+    #         Pair(8, 19),
+    #         Pair(3, 5),
+    #         Pair(2, 9),
+    #         Pair(6, 12)
+    #     ]
 
-        s = self.pph(n, Pair(6, 6))
+    #     s = self.pph(n, Pair(6, 6))
 
-        assert_that(s.values, empty())
-        assert_that(s.r, equal_to(1.0))
+    #     assert_that(s.values, empty())
+    #     assert_that(s.r, equal_to(1.0))
 
     def test_should_add_all_n_in_s_and_n_is_sorted(self):
         n = [
