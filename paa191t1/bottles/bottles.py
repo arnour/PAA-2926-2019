@@ -33,12 +33,14 @@ def bottles(max_height, test_bottles, break_point):
     Args:
         max_height (long): A altura máxima
         test_bottles (int): O número de frascos que podem ser utilizados para testar
-        break_point (long): A altura onde o frasco quebra de fato. Portanto, a altura a ser encontrada.
+        break_point (str): A altura onde o frasco quebra de fato em bits. Portanto, a altura a ser encontrada.
 
     Returns:
         bool, int, int: encontrado, tentativas usadas, frascos usados
     """
 
+    break_point = int(break_point, 2)
+    max_height = int("1" * max_height, 2)
     step = check_point_height(start=0, end=max_height, test_bottles=test_bottles)
     trials = max_trials(max_height, test_bottles)
     found = False

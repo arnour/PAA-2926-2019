@@ -1,6 +1,14 @@
 from paa191t1.bottles.bit_array import BitArray
 
 def get_before_bit(bit_array):
+    """Pega o número na posição anterior em bits.
+
+    Args:
+        bit_array(BitArray): O array de bits original
+    
+    Returns:
+        BitArray: o array de bits que representa o número anterior
+    """
     if bit_array[-1] == True:
         bit_array[-1] = False
     else:
