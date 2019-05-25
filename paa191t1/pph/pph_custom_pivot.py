@@ -8,8 +8,9 @@ def pph_custom_pivot(n, t0):
     O algoritmo recebe uma lista n com pares de coordenadas (a, b) e retorna uma lista s, somente com as
     coordenadas que juntas tenham uma razão máxima do tipo r = ((a0 + a1 + ... + an) / (b0 + b1 + ... + bn)).
 
-    Esse algoritmo dá somente uma passada na lista n O(n) verificando o que deve estar na lista s através de um pivot.
-    No caso como padrão utiliza a mediana das medianas.
+    Esse algoritmo tem complexidade de pior caso O(n^2) quando a razão de todos os elementos serão sempre menores que a razão
+    do pivot. Para encontrar o elemento pivot, o algoritmo faz o seguinte cálculo: 
+    pivot = [a0 + (a1 + a2 + ... + an)] / [b0 + (b1 + b2 + ... + bn)] 
 
         Args:
         n (list[Pair]): Lista com coordenadas do tipo Pair.
@@ -22,39 +23,47 @@ def pph_custom_pivot(n, t0):
     k = []
     a = t0.a
     b = t0.b
+
+    i = 0
+    k = n.copy()
+
+    # Calcula um pivot usando a função r = ((a0 + a1 + ... + an) / (b0 + b1 + ... + bn)) em O(n) 
+    pivot = custom_pivot(k, None, t0.a, t0.b)
+
+    a_ = pivot.a
+    b_ = pivot.b
+
+    # Percorre os k elementos para verificar quais devem ser considerados para o conjunto S 
+    # com base no cálculo do pivot 
+    # Na primeira iteração k=n, portanto - O(n)
+    for i in k[:]:
+
+        # Condicional para eliminar elementos menores que o pivot
+        if pivot.r >= i.r:       
+            
+            # Remove o i-ésimo elemento em O(n)
+            k.remove(i)
+            a_ -= i.a
+            b_ -= i.b
+            
+            # Atualiza o pivot descartando os elementos que contribuem negativamente
+            pivot = Pair(a_, b_)
+
+    # Adiciona os elementos que maximizam a razão r em O(n)
+    s.add_all(k)
+
+    return s
+
+    # s = HiperbolicSet(t0.a, t0.b)
+    # k = []
+    # a = t0.a
+    # b = t0.b
+
     # Fica só com elementos que tenham uma razão maior que a razão inicial porque
     # essa razão só tende a aumentar. O(n)
     # for item in n:
     #     if item.r > t0.r:
     #         k.append(item)
-
-    i = 0
-
-    # passo 0:
-    k = n
-    pivot = custom_pivot(k, None, t0.a, t0.b)
-    a_ = pivot.a
-    b_ = pivot.b
-
-    # passo 1:
-    # print("\n\n")
-
-    for i in k[:]:
-        # print("===> bef: {}".format(k))
-        # print("pivot.r >= i.r == {} >= {} {} ".format(str(pivot.r), str(i.r),(pivot.r >= i.r)))
-        if pivot.r >= i.r:
-            k.remove(i)
-            a_ -= i.a
-            b_ -= i.b
-            pivot = Pair(a_, b_)
-        # print("---> aft: {}".format(k))
-
-    s.add_all(k)
-
-    return s
-
-    # passo 1:
-    # while len(k) > 0:
 
     # while len(k) > 0:
     #     # Encontra como pivot o elemento mediano
