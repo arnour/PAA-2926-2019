@@ -53,7 +53,9 @@ from paa191t1.pph.pph_n_log_n import pph_n_lg_n
 from paa191t1.pph.pph_custom_pivot import pph_custom_pivot
 from paa191t1.pph import Pair
 
-pph_files = ['pph_19_01.dat','pph_29_01.dat' ,'pph_39_01.dat','pph_49_01.dat','pph_59_01.dat','pph_69_01.dat','pph_79_01.dat','pph_89_01.dat','pph_99_01.dat']
+pph_files = ['pph_4_01.dat','pph_8_01.dat' ,'pph_16_01.dat','pph_32_01.dat','pph_64_01.dat','pph_128_01.dat','pph_256_01.dat'
+            ,'pph_512_01.dat','pph_1000_01.dat', 'pph_2000_01.dat', 'pph_4000_01.dat', 'pph_10000_01.dat'
+            ]
 
 pph_instances = []
 
@@ -61,24 +63,22 @@ def read_pph_instances(file_path):
   
     with open(file_path) as pph:
         num_instances = pph.readline()
-        a_instances = []
-        b_instances = []
         pairs = []
-        is_a = True
-        for instance in pph.readlines():
-            i = instance.replace("\n", "").strip()
-            if not i:
-                is_a = False
-                continue
-            if is_a:
-                a_instances += i.split(" ")
-            else:
-                b_instances += i.split(" ")
-          
-        t = Pair(int(a_instances[0]), int(b_instances[0]))
-      
-        for i in range(1, len(a_instances)):
-            pairs.append(Pair(int(a_instances[i]),int(b_instances[i])))
+        all_elements = []
+
+        for line in pph.readlines():
+            l = line.strip().split(" ")
+            all_elements += l
+        
+        n = int(num_instances)
+        a0 = int(all_elements[0])
+        b0 = int(all_elements[n+1])
+        t = Pair(a0, b0)
+        
+        for i in range(1, n+1):
+            a = int(all_elements[i])
+            b = int(all_elements[(n+1)+i])
+            pairs.append(Pair(a,b))
       
         return (t, pairs)
 
