@@ -1,6 +1,6 @@
 from paa191t1.bottles.bit_array import BitArray
 
-def get_before_bit(bit_array):
+def get_previews_bit(bit_array):
     """Pega o número na posição anterior em bits.
 
     Args:
@@ -54,10 +54,10 @@ def bottles(max_height, break_point):
         elif ref_bits >= break_point_bits:
             # se for quebrou a garrafa
             used_bottles += 1
-            before_ref = get_before_bit(ref_bits.copy())
+            previews_ref = get_previews_bit(ref_bits.copy())
             
             used_trials += 1
-            if before_ref < break_point_bits:
+            if previews_ref < break_point_bits:
                 # encontramos a posição ótima aonde o frasco quebra.
                 found = True
                 continue
