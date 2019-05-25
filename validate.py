@@ -1,6 +1,7 @@
 from libs.CPUtimer import CPUTimer
 import subprocess
 import sys
+import numpy as np
 
 result_folder = "./data/results/"
 inputs_folder = "./data/inputs/"
@@ -78,6 +79,8 @@ def read_pph_instances(file_path):
         for i in range(1, n+1):
             a = int(all_elements[i])
             b = int(all_elements[(n+1)+i])
+            if b == 0:
+                b = np.random.randint(10,400,size=1)[0]
             pairs.append(Pair(a,b))
       
         return (t, pairs)
