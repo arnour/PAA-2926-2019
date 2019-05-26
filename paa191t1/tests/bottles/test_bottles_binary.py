@@ -1,5 +1,5 @@
 from paa191t1.bottles.bottles_binary import bottles
-from paa191t1.tests.bottles.test_bottles_base import TestBottlesBaseK2, TestBottlesBaseK3, TestBottlesBaseK4
+from paa191t1.tests.bottles.test_bottles_base import *
 from hamcrest import (
     assert_that,
     equal_to
@@ -60,7 +60,7 @@ class TestBottlesBinaryK3(TestBottlesBaseK3):
         found, used_trials, used_bottles = self.bottles(max_height=6, test_bottles=self.K, break_point="111111")
         assert_that(
             (found, used_trials, used_bottles),
-            equal_to((True, 12, 2))
+            equal_to((True, 24, 3))
         )
 
     def test_should_find_break_point_at_median_position(self):
@@ -96,26 +96,40 @@ class TestBottlesBinaryK4(TestBottlesBaseK4):
         found, used_trials, used_bottles = self.bottles(max_height=6, test_bottles=self.K, break_point="111111")
         assert_that(
             (found, used_trials, used_bottles),
-            equal_to((True, 12, 2))
+            equal_to((True, 24, 4))
         )
 
     def test_should_find_break_point_at_median_position(self):
         found, used_trials, used_bottles = self.bottles(max_height=6, test_bottles=self.K, break_point="100000")
         assert_that(
             (found, used_trials, used_bottles),
-            equal_to((True, 12, 3))
+            equal_to((True, 13, 4))
         )
 
     def test_should_find_break_point_at_median_position2(self):
         found, used_trials, used_bottles = self.bottles(max_height=20, test_bottles=self.K, break_point="10000000000000000000")
         assert_that(
             (found, used_trials, used_bottles),
-            equal_to((True, 40, 3))
+            equal_to((True, 41, 4))
         )
 
     def test_should_find_break_point_at_median_position3_worse_case(self):
         found, used_trials, used_bottles = self.bottles(max_height=20, test_bottles=self.K, break_point="10100100100101001010")
         assert_that(
             (found, used_trials, used_bottles),
-            equal_to((True, 18803, 4))
+            equal_to((True, 398, 4))
+        )
+
+class TestBottlesBinaryK16(TestBottlesBaseK16):
+
+    _SKIP = False
+
+    def setUp(self):
+        self.bottles = bottles
+
+    def test_should_find_break_point_at_median_position3_worse_case(self):
+        found, used_trials, used_bottles = self.bottles(max_height=32, test_bottles=self.K, break_point="00111101001110011100000000100110")
+        assert_that(
+            (found, used_trials, used_bottles),
+            equal_to((True, 305, 16))
         )

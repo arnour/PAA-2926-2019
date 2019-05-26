@@ -24,53 +24,55 @@ def get_next_bit(bit_array):
     return bit_array
 
 
-def turn_next_bit_to_true(bit_array, binary=True):
-    # Caso esteja utilizando a busca binária
-    if binary:
-        first_bit = bit_array.length() - 1
-        # Pega o bit mediano
-        middle_bit = first_bit // 2
-        try:
-            # Verifica se existe algum bit com true,
-            first_true = bit_array.index(True)
-        except ValueError:
-            # senão devolve o próprio array de bit com true no final.
-            bit_array[-1] = True
-            return bit_array
-        try:
-            # Verifica se existe um bit falso no range entre o bit mediano e o primeiro verdadeiro.
-            # Se não existir estoura ValueError
-            last_middle = alternative_middle = bit_array.index(False, first_true, middle_bit + 1)
-            # Se existir, itera até encontrar a próxima posição mediana entre o último
-            # bit trocado para verdadeiro e o maior bit verdadeiro.
-            while bit_array[middle_bit] and last_middle != middle_bit:
-                # É possível que a busca não encontre mais um valor mediano, então precisamos
-                # validar para sair do loop
-                last_middle = middle_bit
-                middle_bit = (first_true + middle_bit) // 2
-            # Se a busca não encontrar um valor mediano, usamos o valor de index encontrado antes
-            # e alteramos o bit
-            if last_middle == middle_bit:
-                bit_array[alternative_middle] = True
-            # Senão alteramos o bit encontrado
-            else:
-                bit_array[middle_bit] = True
-        except ValueError:
-            # Caso não tenha um bit falso entre o mediano e o primeiro, vamos para os menores que o mediano
-            try:
-                middle_bit = bit_array.index(False, first_true)
-            except ValueError:
-                # Caso não exista um menor que o mediano, significa que encontramos a posição de quebra
-                # e alteramos os maiores bits para poder tratar isso na função principal
-                middle_bit = bit_array.index(False)
-            bit_array[middle_bit] = True
-    # Senão faz de forma sequencial invertendo sempre o menor bit falso.
-    else:
-        bit_array.reverse()
+def turn_next_bit_to_true_or_false(bit_array, upper, next_index=0):
+    """Pega próximo bit de acordo com o next_index e se deve ir para cima e para baixo e troca o valor dele.
+    Args:
+        bit_array (BitArray): BitArray inicial que deve ter seu valor de volta.
+        upper (bool): se seve continuar aumentando o valor.
+        next_index (int): índice do próximo número que deve ser alterado.
+
+    Returns:
+        (BitArray) pŕoximo número representado em array de bit.
+    """
+    # trabalhamos sempre com os bits ao contrário
+    bit_array.reverse()
+    # Se deve subir o número então só transforma o próximo zero em um.
+    if upper:
         index = bit_array.index(False)
         bit_array[index] = True
-        bit_array.reverse()
-    return bit_array
+    # Se deve descer o número, devemos escolher entre descer todos os bits para zero 
+    # ou somente a partir do contador
+    else:
+        indexes = bit_array.search(BitArray("10"))
+        # Caso exista essa sequência, vamos usar ela como next_index e alterar os zeros de dentro
+        if len(indexes) > 0:
+            index = bit_array.length()
+            normal_next_index = index - indexes[0]
+            # Caso o next_index seja maior que o índice encontrado significa que devemos continuar
+            # andando até encontrar o próximo bit que deve virar zero.
+            if next_index >= normal_next_index:
+                next_index = next_index + 1
+            # Senão usa o próprio índice encontrado
+            else:
+                next_index = normal_next_index
+            # Altera todos abaixo do índice para zero
+            for i in range(index - next_index):
+                bit_array[i] = False
+        # Se não existir a sequência, provavelmente tudo é 1 e devemos decrementar a partir dele
+        else:
+            try:
+                # Se não for tudo um, então estamos com uma subsequência cheia de verdadeiros
+                index = bit_array.index(False)
+            except ValueError:
+                # Se for tudo verdadeiro, então pega o primeiro elemento (equivalente ao tamanho no inverso)
+                next_index += 1
+                index = bit_array.length()
+            # Troca tudo para zero embaixo do índice verdadeiro encontrado
+            for i in range(index - 1 - next_index):
+                bit_array[i] = False
+    bit_array.reverse()
+
+    return bit_array, next_index
 
 
 def bottles(max_height, test_bottles, break_point):
@@ -102,10 +104,11 @@ def bottles(max_height, test_bottles, break_point):
     max_ref_bits.reverse()
     to_right = max_ref_bits.index(True)
     max_ref_bits.reverse()
-
+    upper = True
+    next_index = 0
     # Vamos pulando em steps de baixo para cima para tentarmos encontrar o primeiro
     # range que quebra
-    while ref_bits != max_bits and (test_bottles - used_bottles) > 1 and not found:
+    while (test_bottles - used_bottles) > 1 and not found:
         # Se ainda deve fazer deslocamento para a direita, vai diminuindo gradativamente
         # o tamanho do array de bit
         if to_right > 0:
@@ -116,8 +119,9 @@ def bottles(max_height, test_bottles, break_point):
             # se o frasco quebrar, não devemos mais deslocar para a direita
             if ref_bits >= break_point_bits:
                 used_bottles += 1
-                max_ref_bits = ref_bits
+                max_ref_bits = ref_bits.copy()
                 to_right = 0
+                ref_bits = min_bits.copy()
             # Senão, continuamos a deslocar e vamos atualizando o valor mínimo que pode ser
             else:
                 min_bits = ref_bits.copy()
@@ -125,13 +129,11 @@ def bottles(max_height, test_bottles, break_point):
         # Se já achamos o range que o frsco quebra, então vamos trocando os zeros por um a direita
         # do primeiro bit que tenha 1
         else:
-            binary = False
             # Caso o número de frascos seja menor que 2 podemos trocar os zeros como uma busca binária
-            if (test_bottles - used_bottles) > 2:
-                binary = True
             used_trials += 1
-            # Aqui convertemos os bits com zero sequencialmente ou como busca binaria
-            ref_bits = turn_next_bit_to_true(min_bits.copy(), binary)
+            # Aqui convertemos os bits com zero ou um sequencialmente de acordo com o next_index e se
+            # deve aumentar ou diminuir 
+            ref_bits, next_index = turn_next_bit_to_true_or_false(ref_bits.copy(), upper, next_index)
 
             # No caso em que os arrays de bit de mínimo e máximo são iguais ao de referência,
             # ou quando o ref_bits passou de max_ref_bits então achamos o valor sem precisar
@@ -142,13 +144,14 @@ def bottles(max_height, test_bottles, break_point):
             # Se o valor de referência é maior, quebramos a garrafa e colocamos um novo topo
             elif ref_bits >= break_point_bits:
                 used_bottles += 1
-                max_ref_bits = ref_bits
+                max_ref_bits = ref_bits.copy()
+                upper = False
             # Senão atualizamos o mínimo com a referência
             else:
+                upper = True
                 min_bits = ref_bits.copy()
-
     # Parte sequencial do código
-    while min_bits <= max_bits and not found:
+    while min_bits <= max_ref_bits and not found:
         # Varre sequencialmente o que sobrou entre o número mínimo e máximo de bits
         used_trials += 1
         if min_bits.count() == 0:

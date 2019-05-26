@@ -25,3 +25,12 @@ class TestBottlesBaseK4(TestBase):
 
     def setUp(self):
         self.bottles = lambda x, y, z: None
+
+class TestBottlesBaseK16(TestBase):
+
+    _SKIP = True
+
+    K = 16
+
+    def setUp(self):
+        self.bottles = lambda x, y, z: None
