@@ -8,8 +8,6 @@ from hamcrest import (
 
 class TestAVL(TestBase):
 
-    _SKIP = False
-
     def test_should_build_avl_tree(self):
 
         tree = Tree()

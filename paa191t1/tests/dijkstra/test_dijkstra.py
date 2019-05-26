@@ -14,8 +14,6 @@ from paa191t1.dijkstra import dijkstra
 
 class TestDijkstraBase(TestBase):
 
-    _SKIP = True
-
     def setUp(self):
         self.struct = DijkstraDistance()
 

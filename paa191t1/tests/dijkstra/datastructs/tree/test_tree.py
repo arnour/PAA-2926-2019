@@ -11,8 +11,6 @@ from hamcrest import (
 
 class TestDistanceNode(TestBase):
 
-    _SKIP = False
-
     def test_node_should_be_equal(self):
         node1 = DistanceNode(vertex=3, distance=4)
         node2 = DistanceNode(vertex=3, distance=4)
@@ -45,8 +43,6 @@ class TestDistanceNode(TestBase):
 
 
 class TestTreeTraversal(TestBase):
-
-    _SKIP = False
 
     def test_should_walk_through_tree_in_order(self):
         root = Node(None, DistanceNode(8, 1))

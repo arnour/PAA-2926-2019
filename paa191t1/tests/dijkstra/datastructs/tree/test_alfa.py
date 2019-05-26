@@ -8,8 +8,6 @@ from hamcrest import (
 
 class TestAlfaBalancedNode(TestBase):
 
-    _SKIP = False
-
     def test_balanced_node_should_return_correct_sizes(self):
 
         root = Node(None, 7)
@@ -50,8 +48,6 @@ class TestAlfaBalancedNode(TestBase):
 
 class TestAlfaUnbalancedNode(TestBase):
 
-    _SKIP = False
-
     def test_unbalanced_node_should_return_correct_sizes(self):
 
         root = Node(None, 7)
@@ -77,8 +73,6 @@ class TestAlfaUnbalancedNode(TestBase):
 
 
 class TestAlfaTreeInsertion(TestBase):
-
-    _SKIP = False
 
     def test_should_rebuild_tree(self):
         tree = Tree()
@@ -119,8 +113,6 @@ class TestAlfaTreeInsertion(TestBase):
 
 
 class TestAlfaTreeDeletion(TestBase):
-
-    _SKIP = False
 
     def test_should_rebuild_subtree(self):
         tree = Tree()
