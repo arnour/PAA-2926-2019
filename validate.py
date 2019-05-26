@@ -14,10 +14,11 @@ def test_and_save(filename, instance_name, n, times, function, *args, **kwargs):
         sys.stdout.flush()
         timer.reset()
         timer.start()
-        function(*args, **kwargs)
+        returned = function(*args, **kwargs)
         timer.stop()
         time_lapse = timer.get_time("total", "milliseconds")
-        subprocess.call(f"echo '{instance_name},{n},{time_lapse}' >> {result_folder}/{filename}", shell=True)
+        extra_args = ",".join([str(r) for r in returned])
+        subprocess.call(f"echo '{instance_name},{n},{time_lapse},{extra_args}' >> {result_folder}/{filename}", shell=True)
 
 
 ## Dijkstra
@@ -100,12 +101,14 @@ for pph_function in pph_functions:
 
 QUESTION = "bottles"
 
-from paa191t1.bottles.bottles_binary import bottles
+from paa191t1.bottles.bottles_binary import bottles as bottles_binary
+from paa191t1.bottles.bottles import bottles
+from paa191t1.bottles.binary_search import bottles as binary_search
 
-test_bottles = 2
+test_bottles = 8
 
 with open(f"{inputs_folder}/{QUESTION}/bignum_256_01.dat") as bignum:
     num_bits, num_instances = bignum.readline().replace("\n", "").split(" ")
     for instance in bignum.readlines():
         number = instance.replace("\n", "")
-        test_and_save(f"{QUESTION}/binary_search_{test_bottles}.csv", num_bits, num_instances, 1, bottles, int(num_bits), test_bottles, number)
+        test_and_save(f"{QUESTION}/binary_search_{test_bottles}.csv", num_bits, num_instances, 1, binary_search, int(num_bits), number)
