@@ -5,6 +5,7 @@ clean:
 
 setup:
 	pip install -r requirements.txt
+	pip install -r requirements_test.txt
 	tox -r
 
 tests:

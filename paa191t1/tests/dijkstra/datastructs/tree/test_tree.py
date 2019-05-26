@@ -57,5 +57,5 @@ class TestTreeTraversal(TestBase):
 
         assert_that(
             nodes,
-            equal_to([(6, 2), (8, 1), (10, 3)])
+            equal_to([DistanceNode(6, 2), DistanceNode(8, 1), DistanceNode(10, 3)])
         )

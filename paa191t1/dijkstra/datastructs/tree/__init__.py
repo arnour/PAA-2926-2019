@@ -31,6 +31,6 @@ class TreeTraversal(object):
         nodes = []
         if root:
             nodes = nodes + self.inorder(root.left)
-            nodes.append((root.key.vertex, root.key.distance))
+            nodes.append(root.key)
             nodes = nodes + self.inorder(root.right)
         return nodes
