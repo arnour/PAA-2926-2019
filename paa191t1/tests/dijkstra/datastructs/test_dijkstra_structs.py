@@ -1,5 +1,5 @@
 import math
-from unittest import skip, TestCase
+from paa191t1.tests import TestBase
 from hamcrest import (
     assert_that,
     has_length,
@@ -9,13 +9,12 @@ from hamcrest import (
 from paa191t1.dijkstra.datastructs import DijkstraDistance
 
 
-@skip("Base Class")
-class TestStructsBase(TestCase):
+class TestStructsBase(TestBase):
 
     struct = DijkstraDistance()
 
     def create_struct(self, number_of_nodes=4):
-        return self.struct(nodes=range(number_of_nodes))
+        return self.struct(nodes=list(range(number_of_nodes)))
 
     def test_should_smallest_distance_init_all_nodes_distance_with_infinity(self):
         struct = self.create_struct(number_of_nodes=4)

@@ -21,9 +21,8 @@ class AVL(datastructs.DijkstraDistance):
         return popped.key.vertex, popped.key.distance
 
     def update(self, node, distance):
-        found = self.__tree.delete(DistanceNode(node, self.__distances[node]))
-        found.key.distance = distance
-        self.__tree.insert(found.key)
+        self.__tree.delete(DistanceNode(node, self.__distances[node]))
+        self.__tree.insert(DistanceNode(node, distance))
         self.__distances[node] = distance
 
     def has_nodes_to_visit(self):

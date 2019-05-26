@@ -33,7 +33,7 @@ class AVLNode(object):
 
     def _str(self):
         """Internal method for ASCII art."""
-        label = str(self.key)
+        label = self.__label__()
         if self.left is None:
             left_lines, left_pos, left_width = [], 0, 0
         else:
@@ -64,7 +64,10 @@ class AVLNode(object):
         return lines, pos, width
 
     def __str__(self):
-        return '\n'.join(self._str()[0])
+        return '----' + '\n'.join(self._str()[0]) + '\n----'
+
+    def __label__(self):
+        return str(self.key)
 
     def find(self, k):
         """Finds and returns the node with key k from the subtree rooted at this
@@ -271,31 +274,13 @@ class AVL(object):
         Args:
             k: The key of the node to be inserted.
         """
-        node = AVLNode(None, k)
+        node = self.new(None, k)
         if self.root is None:
             # The root's parent is None.
             self.root = node
         else:
             self.root.insert(node)
-        self.rebalance(node)
-
-    def __delete(self, node):
-        if node is None:
-            return None
-        if node is self.root:
-            pseudoroot = AVLNode(None, 0)
-            pseudoroot.left = self.root
-            self.root.parent = pseudoroot
-            deleted = self.root.delete()
-            self.root = pseudoroot.left
-            if self.root is not None:
-                self.root.parent = None
-        else:
-            deleted = node.delete()
-        # node.parent is actually the old parent of the node,
-        # which is the first potentially out-of-balance node.
-        self.rebalance(deleted.parent)
-        return deleted
+        self.rebalance_insert(node)
 
     def delete(self, k):
         """Deletes and returns a node with key k if it exists from the BST.
@@ -319,3 +304,34 @@ class AVL(object):
 
     def inorder(self):
         return self.traversal.inorder(self.root)
+
+    def __delete(self, node):
+        if node is None:
+            return None
+        if node is self.root:
+            pseudoroot = self.new(None, None)
+            pseudoroot.left = self.root
+            self.root.parent = pseudoroot
+            deleted = self.root.delete()
+            self.root = pseudoroot.left
+            if self.root is not None:
+                self.root.parent = None
+            else:
+                self.root = None
+            if deleted.parent.key is None:
+                deleted.parent = None
+        else:
+            deleted = node.delete()
+            # node.parent is actually the old parent of the node,
+            # which is the first potentially out-of-balance node.
+        self.rebalance_delete(deleted)
+        return deleted
+
+    def rebalance_delete(self, node):
+        self.rebalance(node.parent)
+
+    def rebalance_insert(self, node):
+        self.rebalance(node)
+
+    def new(self, parent, k):
+        return AVLNode(parent, k)

@@ -11,8 +11,6 @@ from hamcrest import (
 
 class TestDistanceNode(TestBase):
 
-    _SKIP = False
-
     def test_node_should_be_equal(self):
         node1 = DistanceNode(vertex=3, distance=4)
         node2 = DistanceNode(vertex=3, distance=4)
@@ -46,8 +44,6 @@ class TestDistanceNode(TestBase):
 
 class TestTreeTraversal(TestBase):
 
-    _SKIP = False
-
     def test_should_walk_through_tree_in_order(self):
         root = Node(None, DistanceNode(8, 1))
         root.left = Node(root, DistanceNode(6, 2))
@@ -57,5 +53,5 @@ class TestTreeTraversal(TestBase):
 
         assert_that(
             nodes,
-            equal_to([(6, 2), (8, 1), (10, 3)])
+            equal_to([DistanceNode(6, 2), DistanceNode(8, 1), DistanceNode(10, 3)])
         )

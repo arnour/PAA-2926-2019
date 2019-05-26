@@ -24,6 +24,8 @@ class DistanceNode(object):
     def __str__(self):
         return f'(v: {self.vertex}, d: {self.distance})'
 
+    __repr__ = __str__
+
 
 class TreeTraversal(object):
 
@@ -31,6 +33,6 @@ class TreeTraversal(object):
         nodes = []
         if root:
             nodes = nodes + self.inorder(root.left)
-            nodes.append((root.key.vertex, root.key.distance))
+            nodes.append(root.key)
             nodes = nodes + self.inorder(root.right)
         return nodes
