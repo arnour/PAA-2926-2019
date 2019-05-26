@@ -24,6 +24,8 @@ class DistanceNode(object):
     def __str__(self):
         return f'(v: {self.vertex}, d: {self.distance})'
 
+    __repr__ = __str__
+
 
 class TreeTraversal(object):
 

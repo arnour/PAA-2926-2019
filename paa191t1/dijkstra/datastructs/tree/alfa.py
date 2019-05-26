@@ -42,10 +42,11 @@ class Alfa(Tree):
         return self.root.is_balanced(self.__alfa)
 
     def rebalance_delete(self, node):
-        node.parent.size -= 1
-        if node.parent.parent:
-            node.parent.parent.size -= 1
-        self.rebalance(node.parent)
+        if node.parent is not None:
+            node.parent.size -= 1
+            if node.parent.parent:
+                node.parent.parent.size -= 1
+            self.rebalance(node.parent)
 
     def rebalance_insert(self, node):
         self.rebalance(node)

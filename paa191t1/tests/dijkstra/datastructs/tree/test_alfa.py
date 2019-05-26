@@ -192,5 +192,4 @@ class TestAlfaTreeDeletion(TestBase):
         tree.delete(19)
         tree.delete(5)
 
-        assert_that(tree.root, equal_to(0))
-        assert_that(tree.is_balanced, equal_to(True))
+        assert_that(tree.root, equal_to(None))

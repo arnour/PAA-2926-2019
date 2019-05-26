@@ -64,7 +64,7 @@ class AVLNode(object):
         return lines, pos, width
 
     def __str__(self):
-        return '\n'.join(self._str()[0])
+        return '----' + '\n'.join(self._str()[0]) + '\n----'
 
     def __label__(self):
         return str(self.key)
@@ -309,17 +309,21 @@ class AVL(object):
         if node is None:
             return None
         if node is self.root:
-            pseudoroot = self.new(None, 0)
+            pseudoroot = self.new(None, None)
             pseudoroot.left = self.root
             self.root.parent = pseudoroot
             deleted = self.root.delete()
             self.root = pseudoroot.left
             if self.root is not None:
                 self.root.parent = None
+            else:
+                self.root = None
+            if deleted.parent.key is None:
+                deleted.parent = None
         else:
             deleted = node.delete()
-        # node.parent is actually the old parent of the node,
-        # which is the first potentially out-of-balance node.
+            # node.parent is actually the old parent of the node,
+            # which is the first potentially out-of-balance node.
         self.rebalance_delete(deleted)
         return deleted
 
