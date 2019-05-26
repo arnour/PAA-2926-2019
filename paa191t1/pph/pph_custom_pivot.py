@@ -9,8 +9,8 @@ def pph_custom_pivot(n, t0):
     coordenadas que juntas tenham uma razão máxima do tipo r = ((a0 + a1 + ... + an) / (b0 + b1 + ... + bn)).
 
     Esse algoritmo tem complexidade de pior caso O(n^2) quando a razão de todos os elementos serão sempre menores que a razão
-    do pivot. Para encontrar o elemento pivot, o algoritmo faz o seguinte cálculo: 
-    pivot = [a0 + (a1 + a2 + ... + an)] / [b0 + (b1 + b2 + ... + bn)] 
+    do pivot. Para encontrar o elemento pivot, o algoritmo faz o seguinte cálculo:
+    pivot = [a0 + (a1 + a2 + ... + an)] / [b0 + (b1 + b2 + ... + bn)]
 
         Args:
         n (list[Pair]): Lista com coordenadas do tipo Pair.
@@ -27,25 +27,25 @@ def pph_custom_pivot(n, t0):
     i = 0
     k = n.copy()
 
-    # Calcula um pivot usando a função r = ((a0 + a1 + ... + an) / (b0 + b1 + ... + bn)) em O(n) 
+    # Calcula um pivot usando a função r = ((a0 + a1 + ... + an) / (b0 + b1 + ... + bn)) em O(n)
     pivot = custom_pivot(k, None, t0.a, t0.b)
 
     a_ = pivot.a
     b_ = pivot.b
 
-    # Percorre os k elementos para verificar quais devem ser considerados para o conjunto S 
-    # com base no cálculo do pivot 
+    # Percorre os k elementos para verificar quais devem ser considerados para o conjunto S
+    # com base no cálculo do pivot
     # Na primeira iteração k=n, portanto - O(n)
     for i in k[:]:
 
         # Condicional para eliminar elementos menores que o pivot
-        if pivot.r >= i.r:       
-            
+        if pivot.r >= i.r:
+
             # Remove o i-ésimo elemento em O(n)
             k.remove(i)
             a_ -= i.a
             b_ -= i.b
-            
+
             # Atualiza o pivot descartando os elementos que contribuem negativamente
             pivot = Pair(a_, b_)
 

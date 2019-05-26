@@ -1,6 +1,3 @@
-from paa191t1.bottles.bit_array import BitArray
-
-
 def bottles(max_height, break_point):
     """O algoritmo recebe o número de bits e a altura que um frasco quebra em bits.
 
@@ -24,13 +21,13 @@ def bottles(max_height, break_point):
 
     while not found:
         used_trials += 1
-        
+
         if (pivot == max_bound) or (pivot == min_bound):
-            # Não precisamos gastar uma tentativa ou garrafa aqui porque estão nas pontas 
+            # Não precisamos gastar uma tentativa ou garrafa aqui porque estão nas pontas
             # e são os últimos números que a busca binária vai testar
             used_trials -= 1
             found = True
-            
+
         # Se quebrou a garrafa então é porque está a cima do breakpoint e precisamos
         # diminuir o upper_bound.
         elif pivot >= decimal_break_point:

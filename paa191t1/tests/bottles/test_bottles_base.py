@@ -1,5 +1,6 @@
 from paa191t1.tests import TestBase
 
+
 class TestBottlesBaseK2(TestBase):
 
     _SKIP = True
@@ -17,9 +18,9 @@ class TestBottlesBaseK3(TestBase):
 
 
 class TestBottlesBaseK4(TestBase):
-    
+
     _SKIP = True
-  
+
     K = 4
 
     def setUp(self):

@@ -1,8 +1,7 @@
 from hamcrest import (
     assert_that,
     equal_to,
-    close_to,
-    empty
+    close_to
 )
 from paa191t1.pph import Pair
 from paa191t1.tests import TestBase

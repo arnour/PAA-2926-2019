@@ -1,15 +1,16 @@
 from paa191t1.bottles.bit_array import BitArray
 
+
 def get_previews_bit(bit_array):
     """Pega o número na posição anterior em bits.
 
     Args:
         bit_array(BitArray): O array de bits original
-    
+
     Returns:
         BitArray: o array de bits que representa o número anterior
     """
-    if bit_array[-1] == True:
+    if bit_array[-1]:
         bit_array[-1] = False
     else:
         bit_array.reverse()
@@ -19,6 +20,7 @@ def get_previews_bit(bit_array):
         bit_array[index] = False
         bit_array.reverse()
     return bit_array
+
 
 def bottles(max_height, break_point):
     """O algoritmo recebe o número de bits e a altura que um frasco quebra em bits.
@@ -46,7 +48,7 @@ def bottles(max_height, break_point):
         used_trials += 1
 
         if ref_bits.all() or (ref_bits.count() == 0):
-            # Não precisamos gastar uma tentativa ou garrafa aqui porque estão nas pontas 
+            # Não precisamos gastar uma tentativa ou garrafa aqui porque estão nas pontas
             # e são os últimos números que a busca binária vai testar
             used_trials -= 1
             found = True
@@ -55,7 +57,7 @@ def bottles(max_height, break_point):
             # se for quebrou a garrafa
             used_bottles += 1
             previews_ref = get_previews_bit(ref_bits.copy())
-            
+
             used_trials += 1
             if previews_ref < break_point_bits:
                 # encontramos a posição ótima aonde o frasco quebra.
@@ -69,7 +71,7 @@ def bottles(max_height, break_point):
                 # ao deslocar o bit para a direita dividimos o número que o array de bits representa na metade
                 ref_bits = ref_bits >> 1
                 zero_to_change += 1
-                one_to_move = zero_to_change            
+                one_to_move = zero_to_change
             # aqui vamos decrementando dentro de um range menor os bits em potência de 2.
             else:
                 one_to_move += 1

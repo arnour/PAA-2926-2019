@@ -5,8 +5,9 @@ from hamcrest import (
     equal_to
 )
 
+
 class TestBottlesK2(TestBottlesBaseK2):
-    
+
     _SKIP = False
 
     def setUp(self):
@@ -31,7 +32,7 @@ class TestBottlesK2(TestBottlesBaseK2):
         assert_that(
             (found, used_trials, used_bottles),
             equal_to((True, 12, 2))
-            )
+        )
 
 
 class TestBottlesK3(TestBottlesBaseK3):
@@ -61,6 +62,7 @@ class TestBottlesK3(TestBottlesBaseK3):
             (found, used_trials, used_bottles),
             equal_to((True, 10, 3))
         )
+
 
 class TestBottlesK4(TestBottlesBaseK4):
 
