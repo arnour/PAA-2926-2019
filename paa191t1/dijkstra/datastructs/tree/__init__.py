@@ -1,5 +1,6 @@
 class DistanceNode(object):
-
+    """Estrutura de comparação de um nó de distância"""
+    
     def __init__(self, vertex, distance):
         if vertex is None or distance is None:
             raise ValueError('vertex and distance are required to create a Distance node.')
@@ -16,10 +17,21 @@ class DistanceNode(object):
             return (self.distance > other.distance) or (self.distance == other.distance and self.vertex > other.vertex)
         return False
 
+    def __ge__(self, other):
+        if other is not None:
+            return (self.distance >= other.distance) or (self.distance == other.distance and self.vertex > other.vertex)
+        return False
+
     def __lt__(self, other):
         if other is not None:
             return (self.distance < other.distance) or (self.distance == other.distance and self.vertex < other.vertex)
         return False
+
+    def __le__(self, other):
+        if other is not None:
+            return (self.distance <= other.distance) or (self.distance == other.distance and self.vertex < other.vertex)
+        return False
+
 
     def __str__(self):
         return f'(v: {self.vertex}, d: {self.distance})'

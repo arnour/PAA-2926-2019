@@ -8,8 +8,6 @@ from hamcrest import (
 
 class TestBottlesK2(TestBottlesBaseK2):
 
-    _SKIP = False
-
     def setUp(self):
         self.bottles = bottles
 
@@ -37,8 +35,6 @@ class TestBottlesK2(TestBottlesBaseK2):
 
 class TestBottlesK3(TestBottlesBaseK3):
 
-    _SKIP = False
-
     def setUp(self):
         self.bottles = bottles
 
@@ -65,8 +61,6 @@ class TestBottlesK3(TestBottlesBaseK3):
 
 
 class TestBottlesK4(TestBottlesBaseK4):
-
-    _SKIP = False
 
     def setUp(self):
         self.bottles = bottles

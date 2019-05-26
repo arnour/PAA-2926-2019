@@ -7,8 +7,6 @@ from hamcrest import (
 
 class TestBinarySearchBase(TestBase):
 
-    _SKIP = True
-
     def setUp(self):
         self.bottles = lambda x, y: None
 

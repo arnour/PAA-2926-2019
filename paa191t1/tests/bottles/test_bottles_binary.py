@@ -8,8 +8,6 @@ from hamcrest import (
 
 class TestBottlesBinaryK2(TestBottlesBaseK2):
 
-    _SKIP = False
-
     def setUp(self):
         self.bottles = bottles
 
@@ -44,8 +42,6 @@ class TestBottlesBinaryK2(TestBottlesBaseK2):
 
 class TestBottlesBinaryK3(TestBottlesBaseK3):
 
-    _SKIP = False
-
     def setUp(self):
         self.bottles = bottles
 
@@ -79,8 +75,6 @@ class TestBottlesBinaryK3(TestBottlesBaseK3):
 
 
 class TestBottlesBinaryK4(TestBottlesBaseK4):
-
-    _SKIP = False
 
     def setUp(self):
         self.bottles = bottles
@@ -121,8 +115,6 @@ class TestBottlesBinaryK4(TestBottlesBaseK4):
         )
 
 class TestBottlesBinaryK16(TestBottlesBaseK16):
-
-    _SKIP = False
 
     def setUp(self):
         self.bottles = bottles

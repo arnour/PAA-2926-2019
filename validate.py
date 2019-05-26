@@ -136,7 +136,7 @@ for name, function in algoritms_search.items():
                 number = instance.replace("\n", "")
                 numbers.append(number)
             test_and_save(f"{QUESTION}/{name}_{num_bits}.csv", num_bits, num_instances, 1, for_all_bottles, function, numbers, int(num_bits))
-for test_bottles in [32, 16, 8, 4, 2, 1]:
+for test_bottles in [32, 16, 8]:
     for name, function in algoritms.items():
         for i in range(1, 3):
             with open(f"{inputs_folder}/{QUESTION}/bignum_{bits}_0{i}.dat") as bignum:
