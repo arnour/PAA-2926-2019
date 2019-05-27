@@ -6,7 +6,6 @@ class Pair(object):
 
     def __eq__(self, other):
         if other is not None and isinstance(other, Pair):
-            # return self.a == other.a and self.b == other.b
             return self.r == other.r
         return False
 

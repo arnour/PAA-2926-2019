@@ -44,7 +44,7 @@ make tests
             - O(n lg n)
             - O(n)
             - O(n) com pivot calculado com expressão dada
-    - frascos
+    - bottles
         - k_2 O($\sqrt{n}$)
         - k_n
         - O(lg n)
