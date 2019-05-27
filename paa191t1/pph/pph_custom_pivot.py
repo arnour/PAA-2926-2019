@@ -1,6 +1,6 @@
-
 from paa191t1.pph import HiperbolicSet
 from paa191t1.pph.utils import custom_pivot
+from paa191t1.pph import Pair
 
 
 def pph_custom_pivot(n, t0):
@@ -19,61 +19,59 @@ def pph_custom_pivot(n, t0):
     Returns:
         s (list[Pair]): Lista com coordenadas que maximizam a razão r.
     """
-
     s = HiperbolicSet(t0.a, t0.b)
-    k = []
-    a = t0.a
-    b = t0.b
-    # Na primeira iteração, considera todos os elementos de n
-    # essa razão só tende a aumentar. O(n)
-    for item in n:
-        k.append(item)
+    k = n
 
-    while len(k) > 0:
-        # Encontra como pivot o elemento através da razão = ((a0 + a1 + ... + an) / (b0 + b1 + ... + bn))
-        pivot = custom_pivot(k, None, t0.a, t0.b)
-        a__ = a
-        b__ = b
+    # 0- Calcula um pivot usando a função r = ((a0 + a1 + ... + an) / (b0 + b1 + ... + bn)) em O(n)
+    pivot = custom_pivot(k, None, t0.a, t0.b)
 
-        lower_bounds = []
-        equal_bounds = []
-        upper_bounds = []
+    # 1- Chama os steps da recursão para o cálculo do pph customizado
+    res = pph_steps(k, pivot, pivot.a, pivot.b)
 
-        # Percorre k usando o pivot para fazer o particionamento. Como na primeira iteração k==n, temos O(n)
-        for element in k:
-            if element < pivot:
-                lower_bounds.append(element)
-            elif element == pivot:
-                equal_bounds.append(element)
-                a__ += element.a
-                b__ += element.b
-            else:
-                upper_bounds.append(element)
-                a__ += element.a
-                b__ += element.b
+    # 4- Adiciona a lista com os pares que maximizam a razão - O(n)
+    s.add_all(res)
 
-        # Caso o elemento pivot seja menor que o acumulado voltamos ao loop usando somente os
-        # upper_bounds para não incluir os elementos iguais ao elemento pivot em s.
-        if len(upper_bounds) > 0 and ((a__ / b__) > pivot.r):
-            k = upper_bounds
-        else:
-            # Inclui os elementos maiores que o pivot em s.
-            s.add_all(upper_bounds)
-
-            # Precisamos verificar também nos lower_bounds se existem outros elementos que deveriam entrar na
-            # lista s.
-            if len(lower_bounds) > 0:
-                max_of_lowers = max(lower_bounds)
-                # Se o maior dos elementos tiver uma razão maior que a acumulada, quer dizer que realmente
-                # existem mais elementos que estão no lower_bounds que devem entrar na lista s.
-                if max_of_lowers.r > (a__ / b__):
-                    # Fazemos o k ser só o lower_bounds, já que já adicionamos o resto, e repetimos o loop
-                    # com o k reduzido.
-                    k = lower_bounds
-                    a = a__
-                    b = b__
-                else:
-                    break
-            else:
-                break
     return s
+
+
+def pph_steps(k, p_pivot, a_, b_):
+    """
+    O algoritmo recebe uma lista k com pares de coordenadas (a, b) e retorna uma lista k_temp, somente com as
+    coordenadas que juntas tenham uma razão máxima.
+
+    Esse algoritmo tem complexidade de pior caso O(n^2) quando a razão de somente 1 elemento é pior que o pivot a cada
+    iteração na recursão.
+
+    Args:
+        k (list[Pair]): Lista com coordenadas do tipo Pair.
+        p_pivot: O elemento pivot (Pair) = [a0 + (a1 + a2 + ... + an)] / [b0 + (b1 + b2 + ... + bn)]
+        a_: O valor acumulado [a0 + (a1 + a2 + ... + an)]
+        b_: O valor acumulado [b0 + (b1 + b2 + ... + bn)]
+
+    Returns:
+        s (list[Pair]): Lista com coordenadas que maximizam a razão r.
+    """
+
+    k_temp = []
+    pivot = p_pivot
+    step_deep = False
+    a = a_
+    b = b_
+
+    # 1- Percorre a lista k para eliminar pares de elementos cuja a razão seja menor que a razão do pivot
+    for pair in k:
+        if pivot.r >= pair.r:
+            a -= pair.a
+            b -= pair.b
+            step_deep = True
+        else:
+            k_temp.append(pair)
+
+    # 2- Caso tenha eliminado algum elemento, é necessário ir mais um nível na recursão
+    if step_deep:
+        pivot = Pair(a, b)
+        # 3- Chama novamente o pph_steps para percorrer novamente os pares considerados
+        return pph_steps(k_temp, pivot, a, b)
+
+    else:
+        return k_temp

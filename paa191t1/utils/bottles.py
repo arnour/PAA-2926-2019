@@ -13,7 +13,7 @@ def load_bottles(_file, bottles):
                 "break_point": number
             }
             size = {
-                "n": num_bits
+                "n": int(num_bits)
             }
             if bottles != "ilimitado":
                 size['k'] = bottles
