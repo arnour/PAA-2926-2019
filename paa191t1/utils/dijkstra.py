@@ -44,10 +44,34 @@ def almetro_dijkstra(trials=5, instances=10, complexity=None, struct=None, insta
 def v_plus_e(v=1, e=1):
     return v + e
 
+def c_v_plus_e(c=1,v=1,e=1):
+  
+  return v+e
 
 dijkstra_v_quadratic = Complexity(
     theoretical=lambda v=1, e=1: v * v,
     experimental=v_plus_e,
     text='O(v^2)',
     latex=r'$\mathcal{O}(v^2)$'
+)
+
+dijkstra_v_plus_e_log_v = Complexity(
+    theoretical=lambda v=1, e=1: (v+e) * math.log2(v),
+    experimental=v_plus_e,
+    text='O((v + e) * log v)',
+    latex=r'$\mathcal{O}((v+e) * \log{2,v})$'
+)
+
+dijkstra_v_log_v_plus_e = Complexity(
+    theoretical=lambda v=1, e=1: (v * math.log2(v)) + e,
+    experimental=v_plus_e,
+    text='O((v * log v) + e)',
+    latex=r'$\mathcal{O}((v * \log{2,v}) + e)$'
+)
+
+dijkstra_v_c_plus_e = Complexity(
+    theoretical=lambda v=1, e=1, c=1: (v*c) + e,
+    experimental=c_v_plus_e,
+    text='O((v*c) + e)',
+    latex=r'$\mathcal{O}((v*c) + e)$'
 )
