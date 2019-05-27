@@ -2,6 +2,7 @@ import os
 import almetro
 import random
 from almetro.instance import generator
+from almetro.complexity import cn_quadratic, cn_log_n, cn
 from paa191t1.pph import Pair
 
 
@@ -13,6 +14,10 @@ def but_zero(num):
     if num is None or num == 0:
         return random.randint(10, 400)
     return num
+
+
+def instance_name(file):
+    return file.split('/')[-1].replace('pph_', '').replace('Cópia de pph_', '').replace('.dat', '')
 
 
 def load_pairs(file):
@@ -30,9 +35,8 @@ def load_pairs(file):
                 bbs += nums
             is_a = is_a and len(nums) > 1
         pairs = [Pair(but_zero(aas[i]), but_zero(bbs[i])) for i in range(instance_size)]
-        instance_name = file.split('/')[-1].replace('pph_', '').replace('.dat', '')
         return {
-            'name': f'{instance_name} ({instance_size})',
+            'name': f'{instance_name(file)} ({instance_size})',
             'size': {'n': instance_size},
             'value': {
                 'n': pairs[1:],
@@ -57,3 +61,8 @@ def almetro_pph(trials=5, instances=10, algorithm=None, complexity=None, instanc
         .with_execution(trials=trials, runs=1)\
         .with_instances(instances=instances, provider=generator(instance_generator))\
         .metro(algorithm=algorithm, complexity=complexity)
+
+
+pph_n_quadratic = cn_quadratic
+pph_n = cn
+pph_n_log_n = cn_log_n
