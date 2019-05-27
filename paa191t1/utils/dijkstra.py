@@ -62,14 +62,14 @@ dijkstra_v_plus_e_log_v = Complexity(
     theoretical=lambda v=1, e=1: (v + e) * math.log2(v),
     experimental=v_plus_e,
     text='O((v + e) * log v)',
-    latex=r'$\mathcal{O}((v+e) * \log{2,v})$'
+    latex=r'$\mathcal{O}((v+e) * \log_2{v})$'
 )
 
 dijkstra_v_log_v_plus_e = Complexity(
     theoretical=lambda v=1, e=1: (v * math.log2(v)) + e,
     experimental=v_plus_e,
     text='O((v * log v) + e)',
-    latex=r'$\mathcal{O}((v * \log{2,v}) + e)$'
+    latex=r'$\mathcal{O}((v * \log_2{v}) + e)$'
 )
 
 dijkstra_v_c_plus_e = Complexity(
