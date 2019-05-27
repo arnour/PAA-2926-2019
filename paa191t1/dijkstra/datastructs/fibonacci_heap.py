@@ -23,7 +23,7 @@ class FibHeap(datastructs.DijkstraDistance):
         Returns:
             int, int: nó de menor distância e sua respectiva distância.
         """
-        heap_node = self.__heap.extract_min().data
+        heap_node = self.__heap.extract_min().data  # O(lg v) para remover o menor e aplicar as operações que garantem as invariantes.
         return heap_node.vertex, heap_node.distance
 
     def update(self, node, distance):
@@ -34,7 +34,7 @@ class FibHeap(datastructs.DijkstraDistance):
         """
         heap_node = self.__distances[node]  # O(1) para pegar a referência do nó a atualizar
         new_distance = MinHeapNode(node, distance)
-        self.__heap.decrease_key(heap_node, new_distance)  # O(1) para fazer o decrease + consolidate, o heap_node é atualizado por referência.
+        self.__heap.decrease_key(heap_node, new_distance)  # O(1) para fazer o decrease o no é atualizado por referencia
 
     def has_nodes_to_visit(self):
         """bool: Retorna verdadeiro se existe algum nó que ainda não foi visitado. Do contrário, falso."""

@@ -29,7 +29,7 @@ class Buckets(datastructs.DijkstraDistance):
     def pop(self):
         """Encontra e remove nos buckets o nó com menor distância.
 
-        Percorre os buckets em O(b), sendo b a quantidade de buckets, 
+        Percorre os buckets em O(b), sendo b a quantidade de buckets,
         para encontrar o de menor peso de nós inteiro
         comparando as distâncias até encontrar o nó com menor distância.
         Então remove o nó da do bucket e retorna juntamente com sua distância.
@@ -38,11 +38,11 @@ class Buckets(datastructs.DijkstraDistance):
             int, int: nó de menor distância e sua respectiva distância.
         """
         smallest = math.inf
-        for b_keys in self._buckets.keys(): # O(b) sendo b a quantidade de buckets
+        for b_keys in self._buckets.keys():  # O(b) sendo b a quantidade de buckets
             if (b_keys <= smallest) and (self._buckets[b_keys].size > 0):
                 smallest = b_keys
         node = self._buckets[smallest].pop()
-        del self._non_visited[node] # Remove elemento em O(1)
+        del self._non_visited[node]  # Remove elemento em O(1)
         return node, smallest
 
     def __get_node(self, _dllist, value):
@@ -56,7 +56,7 @@ class Buckets(datastructs.DijkstraDistance):
             dllistnode: nó buscado.
         """
         node = _dllist.first
-        while node.next is not None: # O(v)
+        while node.next is not None:  # O(v)
             if node.value == value:
                 break
             node = node.next
@@ -74,8 +74,8 @@ class Buckets(datastructs.DijkstraDistance):
         """
         last_bucket = self._d_vector[node]
         self._d_vector[node] = distance
-        node_obj = self.__get_node(self._buckets[last_bucket], node) # O(v)
-        self._buckets[last_bucket].remove(node_obj) # O(v)
+        node_obj = self.__get_node(self._buckets[last_bucket], node)  # O(v)
+        self._buckets[last_bucket].remove(node_obj)  # O(v)
         if self._buckets.get(distance):
             self._buckets[distance].append(node)
         else:
@@ -83,7 +83,7 @@ class Buckets(datastructs.DijkstraDistance):
 
     def has_nodes_to_visit(self):
         """Valida nós visitados em O(1)
-        
+
         Returns:
             bool: Retorna verdadeiro se existe algum nó que ainda não foi visitado. Do contrário, falso.
         """
