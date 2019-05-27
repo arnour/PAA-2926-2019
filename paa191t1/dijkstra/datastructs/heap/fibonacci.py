@@ -59,7 +59,10 @@ class FibonacciHeap:
 
     # insert new node into the unordered root list in O(1) time
     def insert(self, data):
-        n = self.Node(data)
+        if not isinstance(data, self.Node):
+            n = self.Node(data)
+        else:
+            n = data
         n.left = n.right = n
         self.merge_with_root_list(n)
         if self.min_node is None or n.data < self.min_node.data:
