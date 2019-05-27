@@ -2,4 +2,5 @@ setuptools>=41.0.0
 networkx==2.3
 pyllist==0.3
 bitarray==0.9.2
+almetro>=1.0.6
 tox

@@ -1,7 +1,10 @@
 import os
 import networkx as nx
 from networkx.readwrite.edgelist import read_edgelist
+from paa191t1.dijkstra import dijkstra
 from paa191t1.dijkstra.datastructs.graph import Graph
+import almetro
+from almetro.instance import generator
 
 
 def load_graph(file, distance_struct):
@@ -24,6 +27,15 @@ def generate_dijkstra_instances(instance_dir, distance_struct, size=10):
         yield load_graph(f'{instance_dir}/{file}', distance_struct)
         if i == size:
             break
+
+
+def almetro_dijkstra(trials=5, instances=10, complexity=None, struct=None, instance_path=None):
+    instance_generator = generate_dijkstra_instances(instance_path, struct, instances)
+    return almetro\
+        .new()\
+        .with_execution(trials=trials, runs=1)\
+        .with_instances(instances=instances, provider=generator(instance_generator))\
+        .metro(algorithm=dijkstra, complexity=complexity)
 
 
 def v_plus_e(v=1, e=1):
