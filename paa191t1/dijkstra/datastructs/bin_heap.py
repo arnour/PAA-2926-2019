@@ -68,7 +68,8 @@ class Heap(datastructs.DijkstraDistance):
     def update(self, node, distance):
         """Atualiza a distância de um dado nó e recalcula a posição correta
            na heap binária dada a nova distância. A complexidade desta etapa,
-           considerando o pior caso onde toda a lista será atualizada, é O(log(V)).
+           considerando o pior caso onde somente um elemento será atualizado 
+           na folha da heap, ele custa O(log(V)) para ser encontrado.
        Args:
            node (int): O nó a ser atualizado
            distance (int): A nova distância
