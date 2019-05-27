@@ -101,6 +101,7 @@ class TestAlfaTreeInsertion(TestBase):
 
         assert_that(tree.root, equal_to(10))
         assert_that(tree.is_balanced, equal_to(True))
+        assert_that(tree.root.left, equal_to(6))
         assert_that(tree.root.right, equal_to(13))
 
         tree.insert(15)
@@ -109,6 +110,7 @@ class TestAlfaTreeInsertion(TestBase):
 
         assert_that(tree.root, equal_to(11))
         assert_that(tree.is_balanced, equal_to(True))
+        assert_that(tree.root.left, equal_to(6))
         assert_that(tree.root.right, equal_to(15))
 
 
@@ -130,6 +132,7 @@ class TestAlfaTreeDeletion(TestBase):
 
         assert_that(tree.root, equal_to(10))
         assert_that(tree.is_balanced, equal_to(True))
+        assert_that(tree.root.left, equal_to(6))
         assert_that(tree.root.right, equal_to(13))
 
         tree.insert(15)
@@ -138,14 +141,20 @@ class TestAlfaTreeDeletion(TestBase):
         tree.insert(17)
         tree.insert(19)
 
+        assert_that(tree.root, equal_to(13))
+        assert_that(tree.is_balanced, equal_to(True))
+        assert_that(tree.root.left, equal_to(7))
+        assert_that(tree.root.right, equal_to(16))
+
         tree.delete(16)
         tree.delete(18)
         tree.delete(19)
         tree.delete(17)
 
-        assert_that(tree.root, equal_to(10))
+        assert_that(tree.root, equal_to(11))
         assert_that(tree.is_balanced, equal_to(True))
-        assert_that(tree.root.right, equal_to(13))
+        assert_that(tree.root.left, equal_to(6))
+        assert_that(tree.root.right, equal_to(14))
 
     def test_should_rebuild_subtree_removing_roots(self):
         tree = Tree()
@@ -163,6 +172,7 @@ class TestAlfaTreeDeletion(TestBase):
 
         assert_that(tree.root, equal_to(10))
         assert_that(tree.is_balanced, equal_to(True))
+        assert_that(tree.root.left, equal_to(6))
         assert_that(tree.root.right, equal_to(13))
 
         tree.insert(15)
@@ -170,6 +180,11 @@ class TestAlfaTreeDeletion(TestBase):
         tree.insert(18)
         tree.insert(17)
         tree.insert(19)
+
+        assert_that(tree.root, equal_to(13))
+        assert_that(tree.is_balanced, equal_to(True))
+        assert_that(tree.root.left, equal_to(7))
+        assert_that(tree.root.right, equal_to(16))
 
         tree.delete(13)
         tree.delete(14)

@@ -41,12 +41,15 @@ class Alfa(Tree):
     def is_balanced(self):
         return self.root.is_balanced(self.__alfa)
 
+    def update_size(self, node):
+        if node:
+            node.size -= 1
+            if node.parent:
+                self.update_size(node.parent)
+
     def rebalance_delete(self, node):
-        if node.parent is not None:
-            node.parent.size -= 1
-            if node.parent.parent:
-                node.parent.parent.size -= 1
-            self.rebalance(node.parent)
+        self.update_size(node)
+        self.rebalance(node.parent)
 
     def rebalance_insert(self, node):
         self.rebalance(node)
@@ -69,10 +72,11 @@ class Alfa(Tree):
             new_root = self.rebuild_subtree(root_to_rebuild)
             if new_root.parent is None:
                 self.root = new_root
-            elif new_root.parent.right and new_root.parent.right.key == root_to_rebuild.parent.right.key:
-                root_to_rebuild.parent.right = new_root
             else:
-                root_to_rebuild.parent.left = new_root
+                if new_root.parent.left and new_root.parent.left.key == root_to_rebuild.key:
+                    new_root.parent.left = new_root
+                elif new_root.parent.right and new_root.parent.right.key == root_to_rebuild.key:
+                    new_root.parent.right = new_root
             self.rebalance(new_root)
 
     def rebuild_subtree(self, root):
