@@ -42,3 +42,10 @@ def almetro_dijkstra(trials=5, instances=10, complexity=None, struct=None, insta
 
 def v_plus_e(v=1, e=1):
     return v + e
+
+dijkstra_v_quadratic = Complexity(
+    theoretical=lambda v=1, e=1: v * v,
+    experimental=v_plus_e,
+    text='O(v^2)',
+    latex=r'$\mathcal{O}(v^2)$'
+)
