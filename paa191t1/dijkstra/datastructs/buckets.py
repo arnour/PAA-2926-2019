@@ -45,8 +45,8 @@ class Buckets(datastructs.DijkstraDistance):
         del self._non_visited[node]  # Remove elemento em O(1)
         return node, smallest
 
-    def __get_node(self, _dllist, value):
-        """Pega objeto do nó em O(v) na lista duplamente encadeada.
+    def __pop_node(self, _dllist, value):
+        """Acha e remove objeto do nó em O(v) na lista duplamente encadeada.
 
         Args:
             _dllist (dllist): lista duplamente encadeada a ser buscada
@@ -60,7 +60,7 @@ class Buckets(datastructs.DijkstraDistance):
             if node.value == value:
                 break
             node = node.next
-        return node
+        return _dllist.remove(node)
 
     def update(self, node, distance):
         """Atualiza a distância de um nó no seu bucket correto em O(v).
@@ -74,8 +74,7 @@ class Buckets(datastructs.DijkstraDistance):
         """
         last_bucket = self._d_vector[node]
         self._d_vector[node] = distance
-        node_obj = self.__get_node(self._buckets[last_bucket], node)  # O(v)
-        self._buckets[last_bucket].remove(node_obj)  # O(v)
+        self.__pop_node(self._buckets[last_bucket], node)  # O(v)
         if self._buckets.get(distance):
             self._buckets[distance].append(node)
         else:
