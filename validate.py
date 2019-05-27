@@ -109,40 +109,44 @@ from paa191t1.bottles.bottles_binary import bottles as bottles_binary
 from paa191t1.bottles.bottles import bottles
 from paa191t1.bottles.binary_search import bottles as binary_search
 from paa191t1.bottles.binary_search_decimal import bottles as binary_search_decimal
+from almetro.complexity import cn_quadratic
+# bits = 32
+# algoritms_search = {
+#         # "binary_search": binary_search,
+#         # "binary_search_decimal": binary_search_decimal,
+# }
+# algoritms = {
+#         # "bottles": bottles,
+#         "bottles_binary": bottles_binary
+# }
 
-bits = 32
-algoritms_search = {
-        # "binary_search": binary_search,
-        # "binary_search_decimal": binary_search_decimal,
-}
-algoritms = {
-        # "bottles": bottles,
-        "bottles_binary": bottles_binary
-}
+# def for_all_bottles(function, all_bottles, *args):
+#     returned = []
+#     for bottle in all_bottles:
+#         arguments = list(args) + [bottle]
+#         returned += list(function(*arguments))
+#     return returned
 
-def for_all_bottles(function, all_bottles, *args):
-    returned = []
-    for bottle in all_bottles:
-        arguments = list(args) + [bottle]
-        returned += list(function(*arguments))
-    return returned
+# for name, function in algoritms_search.items():
+#     for i in range(1, 3):
+#         with open(f"{inputs_folder}/{QUESTION}/bignum_{bits}_0{i}.dat") as bignum:
+#             num_bits, num_instances = bignum.readline().replace("\n", "").split(" ")
+#             numbers = []
+#             for instance in bignum.readlines():
+#                 number = instance.replace("\n", "")
+#                 numbers.append(number)
+#             test_and_save(f"{QUESTION}/{name}_{num_bits}.csv", num_bits, num_instances, 1, for_all_bottles, function, numbers, int(num_bits))
+# for test_bottles in [32, 16, 8]:
+#     for name, function in algoritms.items():
+#         for i in range(1, 3):
+#             with open(f"{inputs_folder}/{QUESTION}/bignum_{bits}_0{i}.dat") as bignum:
+#                 num_bits, num_instances = bignum.readline().replace("\n", "").split(" ")
+#                 numbers = []
+#                 for instance in bignum.readlines():
+#                     number = instance.replace("\n", "")
+#                     numbers.append(number)
+#                 test_and_save(f"{QUESTION}/{name}_{num_bits}.csv", num_bits, num_instances, 1, for_all_bottles, function, numbers, int(num_bits), test_bottles)
 
-for name, function in algoritms_search.items():
-    for i in range(1, 3):
-        with open(f"{inputs_folder}/{QUESTION}/bignum_{bits}_0{i}.dat") as bignum:
-            num_bits, num_instances = bignum.readline().replace("\n", "").split(" ")
-            numbers = []
-            for instance in bignum.readlines():
-                number = instance.replace("\n", "")
-                numbers.append(number)
-            test_and_save(f"{QUESTION}/{name}_{num_bits}.csv", num_bits, num_instances, 1, for_all_bottles, function, numbers, int(num_bits))
-for test_bottles in [32, 16, 8]:
-    for name, function in algoritms.items():
-        for i in range(1, 3):
-            with open(f"{inputs_folder}/{QUESTION}/bignum_{bits}_0{i}.dat") as bignum:
-                num_bits, num_instances = bignum.readline().replace("\n", "").split(" ")
-                numbers = []
-                for instance in bignum.readlines():
-                    number = instance.replace("\n", "")
-                    numbers.append(number)
-                test_and_save(f"{QUESTION}/{name}_{num_bits}.csv", num_bits, num_instances, 1, for_all_bottles, function, numbers, int(num_bits), test_bottles)
+from paa191t1.utils.bottles import almetro_bottles
+
+almetro_bottles(5, 10, cn_quadratic, f"{inputs_folder}/{QUESTION}/32", binary_search)
