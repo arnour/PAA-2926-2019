@@ -21,8 +21,10 @@ class FibHeap(datastructs.DijkstraDistance):
     def pop(self):
         """Encontra e remove na heap de fibonacci o nó com menor distância.
         Percorrer a heap de fibonacci para achar o nó com a menor distância.
-                No caso aqui implementado, o nó com a menor distância
-                sempre estará na raiz.
+        No caso aqui implementado, o nó com a menor distância sempre estará
+        na raiz. A complexidade para esta etapa, no pior caso é O(log(V)), 
+        onde V é a quantidade de vértices no grafo armazenado na heap de
+        fibonacci.                
         Returns:
             int, int: nó de menor distância e sua respectiva distância.
     """
@@ -33,6 +35,8 @@ class FibHeap(datastructs.DijkstraDistance):
     def _node_to_min(self, node):
         """Verifica se o dado nó está na lista de nós na raiz da heap de fibonacci.
            Caso esteja, atualiza o valor do nó e reajusta a ordem da heap de fibonacci.
+           A complexidade desta função, no pior caso, seria O(?) [deveria ser O(1), mas
+           tem um loop do lado de fora do decrease key]
         Returns:
             logic: True or False dependendo se o nó está ou não na raiz da Heap.
     """
@@ -45,7 +49,8 @@ class FibHeap(datastructs.DijkstraDistance):
 
     def update(self, node, distance):
         """Atualiza a distância de um dado nó e recalcula as posições corretas
-           na heap de fibonacci dada a nova distância.
+           na heap de fibonacci dada a nova distância. O processo toma complexidade,
+           no pior caso, O(log(V)).
        Args:
            node (int): O nó a ser atualizado
            distance (int): A nova distância
