@@ -29,7 +29,7 @@ def pph_median(n, t0):
 
     while len(k) > 0:
         # Encontra como pivot o elemento mediano
-        pivot = median_of_medians(k, None, t0.a, t0.b)
+        pivot = median_of_medians(k, None, a, b)
 
         # Faz comparativo dessa mediana com todos os elementos da lista. O(n)
         lower_bounds, equal_bounds, upper_bounds = median_bounds(k, pivot)
