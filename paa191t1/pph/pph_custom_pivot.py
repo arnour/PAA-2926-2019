@@ -19,16 +19,17 @@ def pph_custom_pivot(n, t0):
     Returns:
         s (list[Pair]): Lista com coordenadas que maximizam a razão r.
     """
+    # 0- Declaração do objeto HiberbolicSet
     s = HiperbolicSet(t0.a, t0.b)
     k = n
 
-    # 0- Calcula um pivot usando a função r = ((a0 + a1 + ... + an) / (b0 + b1 + ... + bn)) em O(n)
+    # 1- Calcula um pivot usando a função r = ((a0 + a1 + ... + an) / (b0 + b1 + ... + bn)) em O(n)
     pivot = custom_pivot(k, None, t0.a, t0.b)
 
-    # 1- Chama os steps da recursão para o cálculo do pph customizado
+    # 2- Chama os steps da recursão para o cálculo do pph customizado
     res = pph_steps(k, pivot, pivot.a, pivot.b)
 
-    # 4- Adiciona a lista com os pares que maximizam a razão - O(n)
+    # 6- Adiciona a lista com os pares que maximizam a razão - O(n)
     s.add_all(res)
 
     return s
@@ -58,7 +59,7 @@ def pph_steps(k, p_pivot, a_, b_):
     a = a_
     b = b_
 
-    # 1- Percorre a lista k para eliminar pares de elementos cuja a razão seja menor que a razão do pivot
+    # 3- Percorre a lista k para eliminar pares de elementos cuja a razão seja menor que a razão do pivot
     for pair in k:
         if pivot.r >= pair.r:
             a -= pair.a
@@ -67,10 +68,13 @@ def pph_steps(k, p_pivot, a_, b_):
         else:
             k_temp.append(pair)
 
-    # 2- Caso tenha eliminado algum elemento, é necessário ir mais um nível na recursão
+    # 4- Caso tenha eliminado algum elemento, é necessário ir mais um nível na recursão
     if step_deep:
+
+        # 4- Atualiza o pivot com os novos valores de a e b
         pivot = Pair(a, b)
-        # 3- Chama novamente o pph_steps para percorrer novamente os pares considerados
+
+        # 5- Chama novamente o pph_steps para percorrer novamente os pares considerados
         return pph_steps(k_temp, pivot, a, b)
 
     else:
