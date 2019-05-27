@@ -21,7 +21,6 @@ class Heap(datastructs.DijkstraDistance):
 
     def pop(self):
         heap_node = heapq.heappop(self.__heap)
-        self.__distances[heap_node.vertex] = heap_node.distance
 
         return heap_node.vertex, heap_node.distance
 
