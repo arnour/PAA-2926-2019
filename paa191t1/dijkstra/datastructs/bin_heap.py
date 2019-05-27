@@ -32,7 +32,7 @@ class Heap(datastructs.DijkstraDistance):
     def update(self, node, distance):
 
         index = self._search_node_index(node)
-        
+
         heap_node = self.__heap[index]
         heap_node.distance = distance
         self.__distances[heap_node.vertex] = heap_node.distance

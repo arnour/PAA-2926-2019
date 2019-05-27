@@ -40,7 +40,7 @@ def turn_next_bit_to_true_or_false(bit_array, upper, next_index=0):
     if upper:
         index = bit_array.index(False)
         bit_array[index] = True
-    # Se deve descer o número, devemos escolher entre descer todos os bits para zero 
+    # Se deve descer o número, devemos escolher entre descer todos os bits para zero
     # ou somente a partir do contador
     else:
         indexes = bit_array.search(BitArray("10"))
@@ -97,7 +97,6 @@ def bottles(max_height, test_bottles, break_point):
     found = False
     used_trials = used_bottles = 0
     break_point_bits = BitArray(break_point)
-    max_bits = BitArray("1" * max_height)
     max_ref_bits = BitArray("1" + (max_height - 1) * "0")
     ref_bits = min_bits = BitArray("0" * max_height)
 
@@ -132,7 +131,7 @@ def bottles(max_height, test_bottles, break_point):
             # Caso o número de frascos seja menor que 2 podemos trocar os zeros como uma busca binária
             used_trials += 1
             # Aqui convertemos os bits com zero ou um sequencialmente de acordo com o next_index e se
-            # deve aumentar ou diminuir 
+            # deve aumentar ou diminuir
             ref_bits, next_index = turn_next_bit_to_true_or_false(ref_bits.copy(), upper, next_index)
 
             # No caso em que os arrays de bit de mínimo e máximo são iguais ao de referência,

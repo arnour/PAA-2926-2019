@@ -22,7 +22,7 @@ class FibHeap(datastructs.DijkstraDistance):
         heap_node = self.__heap.extract_min().data
 
         return heap_node.vertex, heap_node.distance
- 
+
     def _node_to_min(self, node):
         for heap_node in self.__heap.iterate(self.__heap.root_list):
             if node == heap_node.data.vertex:

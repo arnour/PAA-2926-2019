@@ -15,6 +15,7 @@ class TestBottlesBaseK4(TestBase):
 
     K = 4
 
+
 class TestBottlesBaseK16(TestBase):
 
     K = 16

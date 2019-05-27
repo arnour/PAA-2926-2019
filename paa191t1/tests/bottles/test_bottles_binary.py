@@ -1,5 +1,5 @@
 from paa191t1.bottles.bottles_binary import bottles
-from paa191t1.tests.bottles.test_bottles_base import *
+from paa191t1.tests.bottles.test_bottles_base import TestBottlesBaseK2, TestBottlesBaseK3, TestBottlesBaseK4, TestBottlesBaseK16
 from hamcrest import (
     assert_that,
     equal_to
@@ -113,6 +113,7 @@ class TestBottlesBinaryK4(TestBottlesBaseK4):
             (found, used_trials, used_bottles),
             equal_to((True, 398, 4))
         )
+
 
 class TestBottlesBinaryK16(TestBottlesBaseK16):
 

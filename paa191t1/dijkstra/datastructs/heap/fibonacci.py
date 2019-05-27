@@ -10,7 +10,7 @@ class FibonacciHeap:
             self.parent = self.child = self.left = self.right = None
             self.degree = 0
             self.mark = False
-        
+
         def __repr__(self):
             return str(self.data)
 
