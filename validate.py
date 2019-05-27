@@ -147,6 +147,11 @@ from almetro.complexity import cn_quadratic
 #                     numbers.append(number)
 #                 test_and_save(f"{QUESTION}/{name}_{num_bits}.csv", num_bits, num_instances, 1, for_all_bottles, function, numbers, int(num_bits), test_bottles)
 
-from paa191t1.utils.bottles import almetro_bottles
+from paa191t1.utils.bottles import almetro_bottles, generate_bottles_instances
+from almetro.instance import generator
+# metro = almetro_bottles(5, 10, cn_quadratic, f"{inputs_folder}/{QUESTION}/32", binary_search)
+# metro.table().show()
 
-almetro_bottles(5, 10, cn_quadratic, f"{inputs_folder}/{QUESTION}/32", binary_search)
+a = generator(generate_bottles_instances(f"{inputs_folder}/{QUESTION}/32", "ilimitado", size=10))
+for i in range(10):
+    print(a.new_instance())

@@ -6,20 +6,20 @@ class MinHeapNode(DistanceNode):
 
     def __gt__(self, other):
         if other is not None:
-            return (self.distance > other.distance) or (self.distance == other.distance and self.vertex < other.vertex)
+            return (self.distance > other.distance) or (self.distance == other.distance and self.vertex > other.vertex)
         return False
 
     def __ge__(self, other):
         if other is not None:
-            return (self.distance >= other.distance) or (self.distance == other.distance and self.vertex < other.vertex)
+            return (self.distance >= other.distance) or (self.distance == other.distance and self.vertex > other.vertex)
         return False
 
     def __lt__(self, other):
         if other is not None:
-            return (self.distance < other.distance) or (self.distance == other.distance and self.vertex > other.vertex)
+            return (self.distance < other.distance) or (self.distance == other.distance and self.vertex < other.vertex)
         return False
 
     def __le__(self, other):
         if other is not None:
-            return (self.distance <= other.distance) or (self.distance == other.distance and self.vertex > other.vertex)
+            return (self.distance <= other.distance) or (self.distance == other.distance and self.vertex < other.vertex)
         return False

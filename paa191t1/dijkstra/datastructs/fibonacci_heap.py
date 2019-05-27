@@ -22,9 +22,9 @@ class FibHeap(datastructs.DijkstraDistance):
         """Encontra e remove na heap de fibonacci o nó com menor distância.
         Percorrer a heap de fibonacci para achar o nó com a menor distância.
         No caso aqui implementado, o nó com a menor distância sempre estará
-        na raiz. A complexidade para esta etapa, no pior caso é O(log(V)), 
+        na raiz. A complexidade para esta etapa, no pior caso é O(log(V)),
         onde V é a quantidade de vértices no grafo armazenado na heap de
-        fibonacci.                
+        fibonacci.
         Returns:
             int, int: nó de menor distância e sua respectiva distância.
     """

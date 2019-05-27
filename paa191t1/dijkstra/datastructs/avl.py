@@ -60,7 +60,7 @@ class AVL(datastructs.DijkstraDistance):
 
         Args:
             node (int): O nó
-            
+
         Returns:
                 int: distancia
         """
