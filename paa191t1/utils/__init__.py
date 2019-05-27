@@ -10,7 +10,7 @@ from almetro.instance import generator
 def load_graph(file, distance_struct):
     G = read_edgelist(file, nodetype=int, data=(('weight', float),), create_using=nx.DiGraph())
     return {
-        'name': file.replace('instance_').replace('.edges'),
+        'name': file.replace('instance_', '').replace('.edges', ''),
         'size': {'v': G.number_of_nodes(), 'e': G.number_of_edges()},
         'value': {
             'graph': Graph(G),
