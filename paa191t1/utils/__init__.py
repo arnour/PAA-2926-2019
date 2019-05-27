@@ -5,6 +5,7 @@ from paa191t1.dijkstra import dijkstra
 from paa191t1.dijkstra.datastructs.graph import Graph
 import almetro
 from almetro.instance import generator
+from almetro.complexity import Complexity
 
 
 def load_graph(file, distance_struct):
@@ -32,7 +33,7 @@ def generate_dijkstra_instances(instance_dir, distance_struct, size=10):
 
 
 def almetro_dijkstra(trials=5, instances=10, complexity=None, struct=None, instance_path=None):
-    instance_generator = generate_dijkstra_instances(instance_path, struct, instances)    
+    instance_generator = generate_dijkstra_instances(instance_path, struct, instances)
     return almetro\
         .new()\
         .with_execution(trials=trials, runs=1)\
@@ -42,3 +43,11 @@ def almetro_dijkstra(trials=5, instances=10, complexity=None, struct=None, insta
 
 def v_plus_e(v=1, e=1):
     return v + e
+
+
+dijkstra_v_quadratic = Complexity(
+    theoretical=lambda v=1, e=1: v * v,
+    experimental=v_plus_e,
+    text='O(v^2)',
+    latex=r'$\mathcal{O}(v^2)$'
+)
