@@ -10,3 +10,8 @@ setup:
 
 tests:
 	tox
+
+jupyter:
+	@rm -fr dist/*
+	@python setup.py sdist
+	@cp -f dist/paa191t1-0.0.0.tar.gz /Users/arnour.sabino/DockerVolumes/jupyter/paa191t1-0.0.0.tar.gz
