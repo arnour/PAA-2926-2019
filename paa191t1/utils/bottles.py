@@ -2,6 +2,7 @@ import os
 import almetro
 from almetro.instance import generator
 
+
 def load_bottles(_file, bottles):
     with open(_file) as instance_file:
         num_bits, num_instances = instance_file.readline().replace("\n", "").split(" ")
@@ -23,6 +24,7 @@ def load_bottles(_file, bottles):
                 'value': kwargs
             }
 
+
 def generate_bottles_instances(instance_dir, bottles, size=10):
     i = 0
     for _file in sorted(os.listdir(instance_dir)):
@@ -35,8 +37,9 @@ def generate_bottles_instances(instance_dir, bottles, size=10):
         if i == size:
             break
 
+
 def almetro_bottles(trials=5, instances=10, complexity=None, instance_path=None, bottles_function=None, bottles="ilimitado"):
-    instance_generator = generate_bottles_instances(instance_path, bottles, instances)    
+    instance_generator = generate_bottles_instances(instance_path, bottles, instances)
 
     return almetro\
         .new()\
