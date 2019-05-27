@@ -23,7 +23,9 @@ class Heap(datastructs.DijkstraDistance):
         """Encontra e remove na heap binária o nó com menor distância.
         Percorrer a heap binária para achar o nó com a menor distância.
                 No caso da min heap aqui implementada, o nó com a menor distância
-                sempre estará na raiz.
+                sempre estará na raiz. O custo para a busca e remoção da min heap 
+                é O(log(V)), onde V é o número de vértices do grafo armazenado na 
+                heap.
         Returns:
             int, int: nó de menor distância e sua respectiva distância.
     """
@@ -33,6 +35,8 @@ class Heap(datastructs.DijkstraDistance):
 
     def _search_node_index(self, node):
         """Encontra o índice de um dado nó armazenado na heap binária.
+        A complexidade desta etapa, considerando o pior caso onde o nó
+        está na raiz da árvore, é O(log(V)).
        Returns:
             int: índice do nó a ser requisitado.
     """
@@ -42,7 +46,8 @@ class Heap(datastructs.DijkstraDistance):
 
     def update(self, node, distance):
         """Atualiza a distância de um dado nó e recalcula a posição correta
-           na heap binária dada a nova distância.
+           na heap binária dada a nova distância. A complexidade desta etapa, 
+           considerando o pior caso onde toda a lista será atualizada, é O(V).
        Args:
            node (int): O nó a ser atualizado
            distance (int): A nova distância
