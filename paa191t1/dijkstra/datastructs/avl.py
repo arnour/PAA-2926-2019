@@ -11,6 +11,9 @@ class AVL(datastructs.DijkstraDistance):
 
         Percorre a lista de nós em O(v) e insere cada nó com sua distância inicial na árvore em O(log v).
 
+        Args:
+            nodes (list): lista de nós do grafo
+
         Returns:
             self AVL
         """
@@ -57,6 +60,9 @@ class AVL(datastructs.DijkstraDistance):
 
         Args:
             node (int): O nó
+            
+        Returns:
+                int: distancia
         """
         return self.__distances[node]
 
@@ -64,7 +70,7 @@ class AVL(datastructs.DijkstraDistance):
     def values(self):
         """Cria e retorna um dict com todos os nós e suas distâncias atualizadas em O(v).
 
-        Args:
+        Returns:
             dict(no: distancia)
         """
         return dict([(k, v) for k, v in enumerate(self.__distances) if v is not None])
