@@ -9,8 +9,10 @@ from almetro.instance import generator
 
 def load_graph(file, distance_struct):
     G = read_edgelist(file, nodetype=int, data=(('weight', float),), create_using=nx.DiGraph())
+    instance_name = file.split('/')[-1].replace('instance_', '').replace('.edges', '')
+    instance_size = G.number_of_nodes() + G.number_of_edges()
     return {
-        'name': file.replace('instance_', '').replace('.edges', ''),
+        'name': f'{instance_name} ({instance_size})',
         'size': {'v': G.number_of_nodes(), 'e': G.number_of_edges()},
         'value': {
             'graph': Graph(G),
@@ -30,7 +32,7 @@ def generate_dijkstra_instances(instance_dir, distance_struct, size=10):
 
 
 def almetro_dijkstra(trials=5, instances=10, complexity=None, struct=None, instance_path=None):
-    instance_generator = generate_dijkstra_instances(instance_path, struct, instances)
+    instance_generator = generate_dijkstra_instances(instance_path, struct, instances)    
     return almetro\
         .new()\
         .with_execution(trials=trials, runs=1)\
