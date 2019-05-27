@@ -5,6 +5,13 @@ from paa191t1.dijkstra import datastructs
 class Vector(datastructs.DijkstraDistance):
 
     def __call__(self, nodes):
+        """Cria um vetor com todos os nós e suas distâncias iniciais em O(v)
+
+        Percorre o array de nós inteiro comparando criando um novo vetor com as distâncias iniciais de cada nó.
+
+        Returns:
+            self Vector
+        """
         self.__nodes = []
         self.__distances = [None] * (max(nodes) + 1)
         for node in nodes:
@@ -13,9 +20,9 @@ class Vector(datastructs.DijkstraDistance):
         return self
 
     def pop(self):
-        """Encontra e remove da lista de nós o nó com menor distância.
+        """Encontra e remove da lista de nós o nó com menor distância em O(v).
 
-        Percorre o array de nós inteiro comparando as distâncias até encontrar o nó com menor distância.
+        Percorre a lista de nós não visitados comparando as distâncias até encontrar o nó com menor distância.
         Então remove o nó da lista e retorna juntamento com sua distância.
 
         Returns:
@@ -44,7 +51,7 @@ class Vector(datastructs.DijkstraDistance):
         return len(self.__nodes) > 0
 
     def value(self, node):
-        """Retorna a distância de um dado nó.
+        """Retorna a distância de um dado nó em O(1).
 
         Args:
             node (int): O nó
@@ -53,4 +60,9 @@ class Vector(datastructs.DijkstraDistance):
 
     @property
     def values(self):
+        """Cria e retorna um dict com todos os nós e suas distâncias atualizadas em O(v).
+
+        Args:
+            dict(no: distancia)
+        """
         return dict([(k, v) for k, v in enumerate(self.__distances) if v is not None])
